@@ -190,3 +190,12 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
   .sl-hero .btns{order:5;width:100%}
   .sl-hero .sl-preuves{order:6}
 }
+
+/* --- un exemple concret : les bulles d'un échange tiré d'une leçon --- */
+.sl-exemple{background:var(--bleu);color:#fff;padding:64px 0;position:relative;overflow:hidden}
+.sl-exemple .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.sl-exemple h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.12;margin:8px 0 14px;color:#fff}
+.sl-exemple p{opacity:.88;font-size:1rem;max-width:52ch}
+.sl-exemple .sl-voie-k{color:var(--jaune)}
+.sl-exemple .sl-dialogue{padding:0}
+@media (max-width:900px){.sl-exemple{padding:44px 0}.sl-exemple .wrap{grid-template-columns:1fr;gap:22px}}

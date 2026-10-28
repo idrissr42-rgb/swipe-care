@@ -758,6 +758,15 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
   .sl-hero .btns{order:5;width:100%}
   .sl-hero .sl-preuves{order:6}
 }
+
+/* --- un exemple concret : les bulles d'un échange tiré d'une leçon --- */
+.sl-exemple{background:var(--bleu);color:#fff;padding:64px 0;position:relative;overflow:hidden}
+.sl-exemple .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.sl-exemple h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.12;margin:8px 0 14px;color:#fff}
+.sl-exemple p{opacity:.88;font-size:1rem;max-width:52ch}
+.sl-exemple .sl-voie-k{color:var(--jaune)}
+.sl-exemple .sl-dialogue{padding:0}
+@media (max-width:900px){.sl-exemple{padding:44px 0}.sl-exemple .wrap{grid-template-columns:1fr;gap:22px}}
 </style>
 </head>
 <body>
@@ -834,6 +843,22 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
       <div><b>Vous voulez changer de métier</b><span>Découvrez le travail auprès des enfants, des personnes âgées ou en situation de handicap avant de vous engager, ou préparez votre entrée en formation d’aide-soignant.</span></div>
       <div><b>Vous aidez un proche</b><span>Un parent âgé, un enfant ou un conjoint malade&nbsp;: comprenez la situation, connaissez vos droits et trouvez du répit.</span></div>
       <div><b>Vous travaillez déjà dans le secteur</b><span>Assistante maternelle, auxiliaire de vie, agent en EHPAD, responsable de structure&nbsp;: allez plus loin, et faites former votre équipe sur devis.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sl-exemple" id="exemple">
+  <div class="wrap">
+    <div class="sl-exemple-txt">
+      <span class="sl-voie-k">Un exemple concret</span>
+      <h2>Ce que vous savez faire après une formation</h2>
+      <p>Chaque leçon part d’une situation réelle&nbsp;: un refus, une chute, une inquiétude d’un parent. Vous apprenez quoi faire, quoi dire, ce qui relève d’un autre professionnel, et à qui transmettre.</p>
+    </div>
+    <div class="sl-dialogue" aria-label="Exemple d’échange tiré d’une leçon">
+      <div class="sl-bulle sl-client"><small>Mme D., 86 ans</small>Je ne veux pas me laver ce matin.</div>
+      <div class="sl-bulle sl-vendeur"><small>Vous, après la formation</small>D’accord, on ne force rien. On commence par un café, et je repasse tout à l’heure&nbsp;?</div>
+      <div class="sl-bulle sl-note"><small>Ce que vous apprenez</small>Un refus se respecte, se comprend et se transmet&nbsp;: on propose, on diffère, on ne contraint pas.</div>
+      <div class="sl-etiquette"><b>Formation</b> Agitation et refus de soins</div>
     </div>
   </div>
 </section>
