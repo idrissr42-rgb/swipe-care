@@ -10,6 +10,14 @@ def txt(el):
     return re.sub(r'\s+', ' ', el.get_text(' ', strip=True)).replace(' ,', ',').replace(' .', '.').replace(' ;', ';').replace(' :', ' :')
 
 
+def tableau(el):
+    lignes = [[txt(c) for c in tr.find_all(['td', 'th'])] for tr in el.find_all('tr')]
+    lignes = [l for l in lignes if l]
+    if not lignes:
+        return {'t': 'p', 'x': ''}
+    return {'t': 'tableau', 'tete': lignes[0], 'lignes': lignes[1:]}
+
+
 def blocs_lecon(l):
     soup = BeautifulSoup(l['h'], 'html.parser')
     b = [{'t': 'h', 'x': l['t']}]
@@ -28,8 +36,21 @@ def blocs_lecon(l):
             sources = [(a.get_text(strip=True), a.get('href')) for a in el.find_all('a')]
         elif el.name == 'p':
             b.append({'t': 'p', 'x': txt(el)})
-        elif el.name == 'ul':
+        elif el.name in ('ul', 'ol'):
             b.append({'t': 'liste', 'items': [txt(li) for li in el.find_all('li', recursive=False)]})
+        elif el.name == 'table':
+            b.append(tableau(el))
+        elif 'sw-corrige' in cls or 'sw-projet' in cls:  # exercice corrigé et projet final : repris en entier dans le livret
+            b.append({'t': 'p', 'x': '**' + ('Corrigé commenté de l’exercice' if 'sw-corrige' in cls else 'Projet final') + '**'})
+            for x in el.children:
+                if not getattr(x, 'name', None) or x.name in ('summary',) or (x.name == 'b' and 'sw-projet' in cls):
+                    continue
+                if x.name in ('ul', 'ol'):
+                    b.append({'t': 'liste', 'items': [txt(li) for li in x.find_all('li', recursive=False)]})
+                elif x.name == 'table':
+                    b.append(tableau(x))
+                elif txt(x):
+                    b.append({'t': 'p', 'x': txt(x)})
         elif 'sw-cles' in cls:
             cles = [txt(li) for li in el.find_all('li')]
         elif 'sw-cas' in cls:

@@ -113,7 +113,9 @@ function titreFormation(id) {
 function blocOffre(id) {
   const f = D.fiches[id], nl = Number(f.lecons) || 0, nx = Number(f.examens) || 0, dip = f.diplome;
   const lignes = [
-    [`${nl || "Des"} leçons courtes, avec leurs sources`, "La méthode, des exemples, le piège à éviter, et un exercice à faire en situation réelle."],
+    [`${nl || "Des"} leçons approfondies, avec leurs sources`, "La méthode pas à pas, des exemples, des tableaux et des check-lists, le piège à éviter, et une mise en pratique."],
+    ...(dip ? [] : [["Un exercice corrigé dans chaque leçon", "Un cas à analyser ou un document à produire, puis le corrigé commenté, avec les erreurs fréquentes."],
+      ["Un projet final noté sur 20", "Un projet réaliste sur votre situation de travail, avec sa grille d’évaluation ; vous pouvez l’envoyer à l’école pour un retour."]]),
     [`Un quiz et ${nx === 2 ? "deux examens blancs" : nx ? nx + " examens blancs" : "des examens blancs"}`, "Avec la correction expliquée, pour savoir où vous en êtes avant de passer à la suite."],
     ["Deux livrets à garder", "Le cours complet et une fiche mémo, à relire avant une intervention."],
     ["Des repères officiels, datés", "Recommandations de la HAS, de Santé publique France et de l’INRS, textes de loi : chaque repère renvoie à sa source, avec sa date."],

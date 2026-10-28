@@ -132,6 +132,8 @@ def main(src, dst):
     # icônes des questions d'orientation (⟦nom⟧) : on ajoute au dictionnaire de Cook celles qui lui manquent
     extra = {k: v for k, v in ICS.items() if ('"' + k + '":') not in p.s.split('window.SW_ICP=', 1)[1][:200000].split('</script>', 1)[0]}
     p.un('<script>window.SW_ICP={', '<script>window.SW_ICP={' + ''.join('%s: %s, ' % (json.dumps(k), json.dumps(v, ensure_ascii=False)) for k, v in sorted(extra.items())), 'icônes ajoutées')
+    # livrets chargés à la demande (js/livrets-complets.js) : l'espace élève reste léger sur téléphone
+    p.un("function swLire(f){var d=SW_LIVRETS_DATA[f];if(!d)return;", "function swLire(f){var d=SW_LIVRETS_DATA[f];if(!d)return;if(d._l&&window.SW_LIVRETS_CHARGER)return SW_LIVRETS_CHARGER(function(){swLire(f);});", 'livrets à la demande')
     p.un("window.__ECOLE__='cook';", "window.__ECOLE__='care';", 'école')
 
     # ---------------------------------------------------------------- plan des lignes

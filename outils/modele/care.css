@@ -148,3 +148,17 @@ nav.pub ul a:hover{background:rgba(255,255,255,.2)}
 nav.pub ul a.cta{background:var(--encre);color:#fff}
 nav.pub ul.sw-ouvert{background:#2B7A63!important}
 nav.pub .sw-burger{background:rgba(255,255,255,.22)}
+
+/* exercices corrigés et projet final des leçons (niveau expert) */
+.sw-corrige{margin:14px 0;border:1px solid var(--sl-ligne);border-radius:14px;background:#fff;padding:0}
+.sw-corrige>summary{cursor:pointer;list-style:none;padding:12px 16px;font-size:.95rem;color:var(--encre)}
+.sw-corrige>summary::-webkit-details-marker{display:none}
+.sw-corrige>summary::before{content:"+";display:inline-block;width:1.2em;font-weight:800;color:var(--rouille)}
+.sw-corrige[open]>summary::before{content:"–"}
+.sw-corrige[open]>summary{border-bottom:1px solid var(--sl-ligne)}
+.sw-corrige>*:not(summary){margin-left:16px;margin-right:16px}
+.sw-corrige>*:last-child{margin-bottom:14px}
+.sw-projet{margin:16px 0;padding:16px 18px;border-radius:16px;background:var(--sl-creme);border-left:4px solid var(--rouille)}
+.sw-projet>b:first-child{display:block;font-family:var(--sl-serif);font-size:1.2rem;margin-bottom:6px}
+.sw-projet table{width:100%;border-collapse:collapse;font-size:.9rem}.sw-projet td,.sw-projet th{border:1px solid var(--sl-ligne);padding:6px 8px;text-align:left;vertical-align:top}
+@media (max-width:700px){.sw-projet table{display:block;overflow-x:auto}}

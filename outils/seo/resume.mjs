@@ -23,7 +23,7 @@ const vide = (q) => ({ q: "", o: (q.o || []).map(() => ""), b: 0, e: "" });
 
 export function ecrireResume(PUB = path.resolve(ici, "../../public")) {
   const E = lireGlobal(path.join(PUB, "js/contenus-cours.js"), "SW_ENRICHI");
-  const L = lireGlobal(path.join(PUB, "js/livrets.js"), "SW_LIVRETS_DATA");
+  const L = lireGlobal(path.join(PUB, "js/livrets-complets.js"), "SW_LIVRETS_DATA");
   const connus = new Set(["titre", "sous", "duree", "heures", "ref", "lecons", "vocab", "quiz", "examens"]);
   const R = {};
   for (const [id, m] of Object.entries(E)) {

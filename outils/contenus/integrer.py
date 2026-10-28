@@ -41,7 +41,13 @@ def main(dossier):
         assert '};' not in js, nom + ' : la suite « }; » couperait la lecture par generer.mjs'
     (RACINE / 'public/js/contenus-cours.js').write_text('/* SW_ENRICHI — contenus des formations de Care, avec leurs sources */\nwindow.SW_ENRICHI=' + json.dumps(E, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf-8')
     rendu = (Path(__file__).parent / 'livrets_rendu.js').read_text(encoding='utf-8')  # rendu commun des livrets (repris de Cook, couleurs de Care)
-    (RACINE / 'public/js/livrets.js').write_text('/* SW_LIVRETS */\nwindow.SW_LIVRETS_DATA=' + json.dumps(L, ensure_ascii=False, separators=(',', ':')) + ';\n' + rendu, encoding='utf-8')
+    # livrets : un index léger (titres) chargé avec le cours, le contenu complet chargé à la première ouverture d'un livret
+    (RACINE / 'public/js/livrets-complets.js').write_text('/* SW_LIVRETS complets */\nwindow.SW_LIVRETS_DATA=' + json.dumps(L, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf-8')
+    index = {k: {'titre': v['titre'], 'type': v.get('type'), 'sousTitre': '', 'pages': [], '_l': 1} for k, v in L.items()}
+    charger = ("window.SW_LIVRETS_CHARGER=function(cb){if(window.SW_LIVRETS_PLEINS)return cb();var s=document.createElement('script');"
+               "s.src='js/livrets-complets.js';s.onload=function(){window.SW_LIVRETS_PLEINS=1;cb();};"
+               "s.onerror=function(){alert('Le livret n\\u2019a pas pu se charger. V\\u00e9rifiez votre connexion.');};document.head.appendChild(s);};\n")
+    (RACINE / 'public/js/livrets.js').write_text('/* SW_LIVRETS (index) */\nwindow.SW_LIVRETS_DATA=' + json.dumps(index, ensure_ascii=False, separators=(',', ':')) + ';\n' + charger + rendu, encoding='utf-8')
     # fiches des diplômes préparés (badge, carte « Diplôme préparé », orientation) : lues par outils/modele/depuis_cook.py
     (RACINE / 'outils/modele/diplomes.json').write_text(json.dumps(DIP, ensure_ascii=False, indent=1), encoding='utf-8')
     print('%d formations, %d livrets, %d diplômes préparés' % (len(E), len(L), len(DIP)) + (' ; manquantes : ' + ', '.join(manque) if manque else ''))
