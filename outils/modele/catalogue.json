@@ -196,7 +196,7 @@
     "tp_asms",
     "selection_ifas_ifap"
    ],
-   "public": "Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture."
+   "public": "Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture, ainsi que les débutants et les personnes en recherche d’emploi."
   },
   {
    "n": 2,
@@ -211,7 +211,7 @@
     "garde_domicile",
     "protection_enfance"
    ],
-   "public": "Assistantes maternelles, gardes d’enfants à domicile, professionnels de crèche, parents et personnes en reconversion vers la petite enfance."
+   "public": "Assistantes maternelles, gardes d’enfants à domicile, professionnels de crèche, parents et personnes en reconversion vers la petite enfance, ainsi que les débutants et les personnes en recherche d’emploi."
   },
   {
    "n": 3,
@@ -225,7 +225,7 @@
     "prevention_chutes",
     "gestes_postures"
    ],
-   "public": "Auxiliaires de vie, aides à domicile, assistants de vie aux familles et personnes qui débutent dans l’aide à la personne."
+   "public": "Auxiliaires de vie, aides à domicile, assistants de vie aux familles et personnes qui débutent dans l’aide à la personne, ainsi que les débutants et les personnes en recherche d’emploi."
   },
   {
    "n": 4,
@@ -239,7 +239,7 @@
     "troubles_comportement",
     "handicap_domicile"
    ],
-   "public": "Professionnels qui accompagnent des personnes âgées ou en situation de handicap, à domicile ou en établissement."
+   "public": "Professionnels qui accompagnent des personnes âgées ou en situation de handicap, à domicile ou en établissement, ainsi que les débutants et les personnes en recherche d’emploi."
   },
   {
    "n": 5,
@@ -251,7 +251,7 @@
     "urgence_alerte",
     "sante_mentale"
    ],
-   "public": "Agents de service, personnels d’EHPAD et de structures médico-sociales, et tous ceux qui travaillent auprès de personnes vulnérables."
+   "public": "Agents de service, personnels d’EHPAD et de structures médico-sociales, et tous ceux qui travaillent auprès de personnes vulnérables, ainsi que les débutants et les personnes en recherche d’emploi."
   },
   {
    "n": 6,
@@ -262,7 +262,7 @@
     "communication_epuisement",
     "creer_sap"
    ],
-   "public": "Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne."
+   "public": "Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne, ainsi que les débutants et les personnes en recherche d’emploi."
   }
  ],
  "couleurs": {

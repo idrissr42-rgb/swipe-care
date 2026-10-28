@@ -730,6 +730,15 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sw-projet>b:first-child{display:block;font-family:var(--sl-serif);font-size:1.2rem;margin-bottom:6px}
 .sw-projet table{width:100%;border-collapse:collapse;font-size:.9rem}.sw-projet td,.sw-projet th{border:1px solid var(--sl-ligne);padding:6px 8px;text-align:left;vertical-align:top}
 @media (max-width:700px){.sw-projet table{display:block;overflow-x:auto}}
+
+/* --- pour qui : quatre points de départ --- */
+.sl-pourqui{padding-bottom:6px}
+.sl-pq{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sl-pq>div{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.06);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:8px}
+.sl-pq b{font-family:var(--sl-serif);font-size:1.15rem;line-height:1.2}
+.sl-pq span{color:var(--gris);font-size:.94rem}
+@media (max-width:1000px){.sl-pq{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.sl-pq{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -764,9 +773,9 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
   <div class="blob1"></div><div class="blob2"></div>
   <div class="wrap">
     <div class="sl-hero-txt">
-      <span class="badge-rouille sl-sur">Pour assistantes maternelles, auxiliaires de vie, personnels d’EHPAD et proches aidants</span>
-      <h1>Accompagnez mieux, <span class="j">de la naissance au grand âge,</span> sans quitter votre travail.</h1>
-      <p>Trente formations en ligne, courtes et concrètes&nbsp;: petite enfance, aide à domicile, maladie d’Alzheimer, fin de vie, handicap, hygiène, urgence, et les préparations au CAP AEPE et aux titres professionnels ADVF et ASMS. Chaque leçon s’appuie sur les recommandations officielles et se termine par une mise en pratique.</p>
+      <span class="badge-rouille sl-sur">Pour débuter, se reconvertir, aider un proche ou progresser</span>
+      <h1>Apprenez à accompagner, <span class="j">de la naissance au grand âge,</span> à votre rythme.</h1>
+      <p>Trente formations en ligne, complètes et concrètes&nbsp;: petite enfance, aide à domicile, maladie d’Alzheimer, fin de vie, handicap, hygiène, urgence, et les préparations au CAP AEPE et aux titres professionnels ADVF et ASMS. Que vous cherchiez un emploi, que vous changiez de métier, que vous aidiez un proche ou que vous travailliez déjà dans le secteur, chaque formation part des bases et s’appuie sur les recommandations officielles.</p>
       <div class="btns">
         <a class="btn btn-j" href="#formations">Choisir ma formation</a>
         <a class="btn btn-ghost" href="#" onclick="espace('eleve');return false">Accéder à mes cours</a>
@@ -793,6 +802,19 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
       <div><span class="compteur" data-val="649">0</span><small>leçons avec leurs sources</small></div>
       <div><span class="compteur" data-val="60">0</span><small>livrets et fiches mémo</small></div>
       <div><span class="compteur" data-val="60">0</span><small>examens blancs</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="pubsec sl-pourqui" id="pour-qui">
+  <div class="wrap">
+    <h2 class="sec-title">Pour qui&nbsp;? Pour tout le monde, quel que soit votre point de départ</h2>
+    <p class="sec-sub">Aucun diplôme ni aucune expérience ne sont demandés pour les formations courtes&nbsp;: chacune part des bases.</p>
+    <div class="sl-pq">
+      <div><b>Vous cherchez un emploi</b><span>Les métiers de la petite enfance et de l’aide à la personne s’apprennent&nbsp;: commencez par les bases, puis préparez si vous le souhaitez le CAP AEPE ou un titre professionnel.</span></div>
+      <div><b>Vous voulez changer de métier</b><span>Découvrez le travail auprès des enfants, des personnes âgées ou en situation de handicap avant de vous engager, ou préparez votre entrée en formation d’aide-soignant.</span></div>
+      <div><b>Vous aidez un proche</b><span>Un parent âgé, un enfant ou un conjoint malade&nbsp;: comprenez la situation, connaissez vos droits et trouvez du répit.</span></div>
+      <div><b>Vous travaillez déjà dans le secteur</b><span>Assistante maternelle, auxiliaire de vie, agent en EHPAD, responsable de structure&nbsp;: allez plus loin, et faites former votre équipe sur devis.</span></div>
     </div>
   </div>
 </section>
@@ -824,7 +846,7 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
     <div class="sl-deux-grille">
       <article class="sl-voie">
         <span class="sl-voie-k">Formations courtes</span>
-        <h2>Progresser dès votre prochaine intervention</h2>
+        <h2>Apprendre ou progresser, une formation à la fois</h2>
         <p>Vingt-sept formations de plus de vingt leçons, avec exercices corrigés et projet final&nbsp;: le jeune enfant, l’aide au quotidien, le grand âge, le handicap, l’établissement, les aidants. Attestation de fin de formation.</p>
         <a href="#formations" class="sl-lien">Choisir une formation courte →</a>
       </article>
@@ -3278,7 +3300,7 @@ sante_mentale:"Repérer une souffrance psychique chez une personne accompagnée 
 proches_aidants:"Vos droits et vos soutiens quand vous aidez un proche : congé, répit, aides, organisation, et prévenir votre propre épuisement.",
 communication_epuisement:"Communiquer avec bienveillance avec les personnes, les familles et l’équipe, et prévenir l’épuisement professionnel dans les métiers du soin.",
 creer_sap:"Statut, déclaration, autorisation ou agrément, crédit d’impôt de vos clients, tarifs et premiers clients : lancer votre activité en règle."};
-var PUBLIC={1:"Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture.",2:"Assistantes maternelles, gardes d’enfants à domicile, professionnels de crèche, parents et personnes en reconversion vers la petite enfance.",3:"Auxiliaires de vie, aides à domicile, assistants de vie aux familles et personnes qui débutent dans l’aide à la personne.",4:"Professionnels qui accompagnent des personnes âgées ou en situation de handicap, à domicile ou en établissement.",5:"Agents de service, personnels d’EHPAD et de structures médico-sociales, et tous ceux qui travaillent auprès de personnes vulnérables.",6:"Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne."};
+var PUBLIC={1:"Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture, ainsi que les débutants et les personnes en recherche d’emploi.",2:"Assistantes maternelles, gardes d’enfants à domicile, professionnels de crèche, parents et personnes en reconversion vers la petite enfance, ainsi que les débutants et les personnes en recherche d’emploi.",3:"Auxiliaires de vie, aides à domicile, assistants de vie aux familles et personnes qui débutent dans l’aide à la personne, ainsi que les débutants et les personnes en recherche d’emploi.",4:"Professionnels qui accompagnent des personnes âgées ou en situation de handicap, à domicile ou en établissement, ainsi que les débutants et les personnes en recherche d’emploi.",5:"Agents de service, personnels d’EHPAD et de structures médico-sociales, et tous ceux qui travaillent auprès de personnes vulnérables, ainsi que les débutants et les personnes en recherche d’emploi.",6:"Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne, ainsi que les débutants et les personnes en recherche d’emploi."};
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function L(){return (window.SW_ITIN&&window.SW_ITIN.lignes)||[];}
 function ligneDe(id){var l=L();for(var i=0;i<l.length;i++)if(l[i].ids.indexOf(id)>=0)return l[i];return{n:'',nom:'Formation',c:'#17413A',ids:[id]};}

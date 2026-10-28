@@ -162,3 +162,12 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sw-projet>b:first-child{display:block;font-family:var(--sl-serif);font-size:1.2rem;margin-bottom:6px}
 .sw-projet table{width:100%;border-collapse:collapse;font-size:.9rem}.sw-projet td,.sw-projet th{border:1px solid var(--sl-ligne);padding:6px 8px;text-align:left;vertical-align:top}
 @media (max-width:700px){.sw-projet table{display:block;overflow-x:auto}}
+
+/* --- pour qui : quatre points de départ --- */
+.sl-pourqui{padding-bottom:6px}
+.sl-pq{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sl-pq>div{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.06);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:8px}
+.sl-pq b{font-family:var(--sl-serif);font-size:1.15rem;line-height:1.2}
+.sl-pq span{color:var(--gris);font-size:.94rem}
+@media (max-width:1000px){.sl-pq{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.sl-pq{grid-template-columns:1fr}}
