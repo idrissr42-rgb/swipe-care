@@ -747,6 +747,17 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sl-photos .ph2{object-position:50% 35%}
 @media (max-width:700px){.sl-photos .ph3{width:32%}}
 @media (prefers-reduced-motion:reduce){.sl-photos .ph3{animation:none}}
+/* téléphone : les photos juste après le texte d'accroche, avant « Choisir ma formation » */
+@media (max-width:900px){
+  .sl-hero .wrap{display:flex;flex-direction:column;gap:0}
+  .sl-hero .sl-hero-txt{display:contents}
+  .sl-hero .sl-sur{order:1;align-self:flex-start}
+  .sl-hero h1{order:2}
+  .sl-hero .sl-hero-txt>p{order:3}
+  .sl-hero .sl-photos{order:4;width:100%;margin:4px 0 26px}
+  .sl-hero .btns{order:5;width:100%}
+  .sl-hero .sl-preuves{order:6}
+}
 </style>
 </head>
 <body>
