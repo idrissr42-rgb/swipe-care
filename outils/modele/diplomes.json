@@ -1,1 +1,31 @@
-{}
+{
+ "cap_aepe": {
+  "type": "diplome",
+  "diplome": "CAP Accompagnant éducatif petite enfance",
+  "court": "CAP",
+  "code": "RNCP38565",
+  "niveau": "3",
+  "certif": "ministère de l’Éducation nationale",
+  "voie": "Préparation en ligne aux épreuves professionnelles EP1, EP2 et EP3. Examen en candidat individuel (candidat libre), inscription auprès du rectorat ou du service des examens de votre académie ; au moins 14 semaines (448 heures) de stage ou d’expérience à trouver soi-même et à justifier, dont 3 semaines auprès d’enfants de moins de 3 ans."
+ },
+ "tp_advf": {
+  "type": "diplome",
+  "diplome": "Titre professionnel Assistant de vie aux familles",
+  "court": "Titre pro",
+  "code": "RNCP37715",
+  "niveau": "3",
+  "certif": "ministère du Travail",
+  "voie": "Préparation en ligne aux trois CCP (logement et linge ; accompagnement de la personne ; relais des parents auprès de l’enfant). Le titre se valide lors d’une session organisée par un centre agréé par la DREETS : mise en situation professionnelle, entretien technique, dossier professionnel et entretien final devant un jury habilité. On y accède par un parcours de formation dans un centre agréé (avec évaluations en cours de formation et périodes en entreprise) ou par la VAE ; pas de candidature individuelle. Certificat SST, APS-ASD ou Acteur prévention ASD à obtenir en présentiel.",
+  "nature": "Titre professionnel"
+ },
+ "tp_asms": {
+  "type": "diplome",
+  "diplome": "Titre professionnel Agent de service médico-social",
+  "court": "Titre pro",
+  "code": "RNCP41365",
+  "niveau": "3",
+  "certif": "ministère du Travail",
+  "voie": "Préparation en ligne aux trois CCP (bionettoyage des locaux, service hôtelier, accompagnement du résident) et à la session. Le titre se passe lors d’une session de validation dans un centre agréé par la DREETS : mise en situation professionnelle, dossier professionnel, entretien final. Accès par un parcours de formation dans un organisme, avec périodes en entreprise à trouver soi-même, ou par la VAE ; pas d’accès sur demande individuelle.",
+  "nature": "Titre professionnel"
+ }
+}
