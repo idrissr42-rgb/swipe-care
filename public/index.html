@@ -739,6 +739,14 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sl-pq span{color:var(--gris);font-size:.94rem}
 @media (max-width:1000px){.sl-pq{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.sl-pq{grid-template-columns:1fr}}
+
+/* --- photos du haut de page : deux bulles et une troisième plus petite --- */
+.sl-photos .ph3{position:absolute;width:30%;left:2%;top:4%;aspect-ratio:1/1;object-fit:cover;border-radius:50% 50% 46% 54%/52% 48% 52% 48%;border:5px solid rgba(255,255,255,.3);box-shadow:0 18px 40px rgba(6,24,20,.35);animation:flotte 8s ease-in-out infinite}
+.sl-photos .ph{height:auto}
+.sl-photos .ph1{object-position:50% 30%}
+.sl-photos .ph2{object-position:50% 35%}
+@media (max-width:700px){.sl-photos .ph3{width:32%}}
+@media (prefers-reduced-motion:reduce){.sl-photos .ph3{animation:none}}
 </style>
 </head>
 <body>
@@ -786,11 +794,11 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
         <li>Chaque repère cité avec sa source officielle et sa date</li>
       </ul>
     </div>
-    <div class="hero-visu sl-dialogue" aria-hidden="true">
-      <div class="sl-bulle sl-client"><small>Mme D., 86 ans</small>Je ne veux pas me laver ce matin.</div>
-      <div class="sl-bulle sl-vendeur"><small>Vous, après la formation</small>D’accord, on ne force rien. On commence par un café, et je repasse tout à l’heure&nbsp;?</div>
-      <div class="sl-bulle sl-note"><small>Ce que vous apprenez</small>Un refus se respecte, se comprend et se transmet&nbsp;: on propose, on diffère, on ne contraint pas.</div>
-      <div class="sl-etiquette"><b>Formation</b> Agitation et refus de soins</div>
+    <div class="hero-visu sl-photos" aria-hidden="false">
+      <img class="ph ph1" src="/images/care-hero-1.jpg" width="900" height="1000" alt="Deux auxiliaires de vie aident une dame âgée à se lever de son lit" fetchpriority="high">
+      <img class="ph ph2" src="/images/care-hero-2.jpg" width="600" height="630" alt="Une soignante et une dame âgée sourient, pouce levé">
+      <img class="ph ph3" src="/images/care-hero-3.jpg" width="440" height="440" alt="Une soignante parle avec un enfant hospitalisé, qui sourit" loading="lazy">
+      <div class="pastille-jaune">Cours, quiz et livrets en ligne</div>
     </div>
   </div>
 </header>

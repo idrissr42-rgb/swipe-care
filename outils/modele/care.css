@@ -171,3 +171,11 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sl-pq span{color:var(--gris);font-size:.94rem}
 @media (max-width:1000px){.sl-pq{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.sl-pq{grid-template-columns:1fr}}
+
+/* --- photos du haut de page : deux bulles et une troisième plus petite --- */
+.sl-photos .ph3{position:absolute;width:30%;left:2%;top:4%;aspect-ratio:1/1;object-fit:cover;border-radius:50% 50% 46% 54%/52% 48% 52% 48%;border:5px solid rgba(255,255,255,.3);box-shadow:0 18px 40px rgba(6,24,20,.35);animation:flotte 8s ease-in-out infinite}
+.sl-photos .ph{height:auto}
+.sl-photos .ph1{object-position:50% 30%}
+.sl-photos .ph2{object-position:50% 35%}
+@media (max-width:700px){.sl-photos .ph3{width:32%}}
+@media (prefers-reduced-motion:reduce){.sl-photos .ph3{animation:none}}
