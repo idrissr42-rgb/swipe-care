@@ -1,0 +1,186 @@
+<!-- ===== SÉLECTEUR D'ESPACE (masqué ; utilisé par la navigation) ===== -->
+<div class="rolebar">
+  <div class="wrap">
+    <button class="on" id="rb-pub" onclick="espace('pub')">Site public</button>
+    <button id="rb-eleve" onclick="espace('eleve')">Espace élève</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     1. SITE PUBLIC
+============================================================ -->
+<div id="site-pub">
+<nav class="pub">
+  <div class="wrap">
+    <div class="brand"><span class="toque"><img src="logos/logo-care-blanc.svg" alt="" width="44" height="44"></span><span class="brand-t">SWIPE LEARN SCHOOL<small>Care · aide à la personne</small></span></div>
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="/metiers/">Métiers</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" onclick="espace('eleve');return false">Espace élève</a></li>
+      <li><a href="#inscription" class="cta">Je m'inscris</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero sl-hero" id="accueil">
+  <div class="blob1"></div><div class="blob2"></div>
+  <div class="wrap">
+    <div class="sl-hero-txt">
+      <span class="badge-rouille sl-sur">Pour assistantes maternelles, auxiliaires de vie, personnels d’EHPAD et proches aidants</span>
+      <h1>Accompagnez mieux, <span class="j">de la naissance au grand âge,</span> sans quitter votre travail.</h1>
+      <p>Trente formations en ligne, courtes et concrètes&nbsp;: petite enfance, aide à domicile, maladie d’Alzheimer, fin de vie, handicap, hygiène, urgence, et les préparations au CAP AEPE et aux titres professionnels ADVF et ASMS. Chaque leçon s’appuie sur les recommandations officielles et se termine par une mise en pratique.</p>
+      <div class="btns">
+        <a class="btn btn-j" href="#formations">Choisir ma formation</a>
+        <a class="btn btn-ghost" href="#" onclick="espace('eleve');return false">Accéder à mes cours</a>
+      </div>
+      <ul class="sl-preuves" aria-label="Ce que vous trouvez ici">
+        <li>Un échange avec l’école avant toute inscription, jamais de vente forcée</li>
+        <li>Le prix affiché sur chaque formation, sans surprise</li>
+        <li>Chaque repère cité avec sa source officielle et sa date</li>
+      </ul>
+    </div>
+    <div class="hero-visu sl-dialogue" aria-hidden="true">
+      <div class="sl-bulle sl-client"><small>Mme D., 86 ans</small>Je ne veux pas me laver ce matin.</div>
+      <div class="sl-bulle sl-vendeur"><small>Vous, après la formation</small>D’accord, on ne force rien. On commence par un café, et je repasse tout à l’heure&nbsp;?</div>
+      <div class="sl-bulle sl-note"><small>Ce que vous apprenez</small>Un refus se respecte, se comprend et se transmet&nbsp;: on propose, on diffère, on ne contraint pas.</div>
+      <div class="sl-etiquette"><b>Formation</b> Agitation et refus de soins</div>
+    </div>
+  </div>
+</header>
+
+<section class="bande-chiffres sl-chiffres">
+  <div class="wrap">
+    <div class="chiffres-grid">
+      <div><span class="compteur" data-val="30">0</span><small>formations en ligne</small></div>
+      <div><span class="compteur" data-val="300">0</span><small>leçons avec leurs sources</small></div>
+      <div><span class="compteur" data-val="60">0</span><small>livrets et fiches mémo</small></div>
+      <div><span class="compteur" data-val="60">0</span><small>examens blancs</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="pubsec sl-offre" id="offre">
+  <div class="wrap">
+    <div class="sl-offre-grille">
+      <div class="sl-offre-txt">
+        <span class="sl-voie-k">Ce que vous obtenez</span>
+        <h2>Des gestes justes et des repères sûrs, pas des vidéos à regarder</h2>
+        <p>Une formation Care, c’est un parcours complet, pensé pour que la différence se voie chez les personnes que vous accompagnez&nbsp;: plus de confort, plus de sécurité, plus de respect.</p>
+        <p class="sl-offre-note">Formations courtes de 290 à 390 €, préparations au CAP et aux titres de 990 à 1 290 € : le prix de chaque formation est affiché sur sa fiche.</p>
+      </div>
+      <ul class="sl-pile">
+        <li><b>Dix leçons courtes par formation</b><span>La méthode, des situations concrètes, le piège à éviter, et une mise en pratique sans risque.</span></li>
+        <li><b>Des repères officiels, datés</b><span>Haute Autorité de santé, Santé publique France, INRS, textes de loi&nbsp;: chaque repère renvoie à sa source.</span></li>
+        <li><b>Les limites de votre métier, clairement</b><span>Ce que vous pouvez faire, ce qui revient à l’infirmier ou au médecin, et comment transmettre.</span></li>
+        <li><b>Un quiz et deux examens blancs</b><span>Avec la correction expliquée, pour savoir où vous en êtes.</span></li>
+        <li><b>Deux livrets à garder</b><span>Le cours complet et une fiche mémo, à relire avant une intervention.</span></li>
+        <li><b>Trois préparations aux certifications d’État</b><span>CAP AEPE, titres professionnels ADVF et ASMS&nbsp;: les épreuves, le dossier, l’accès à l’examen.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="pubsec sl-deux" id="deux-voies">
+  <div class="wrap">
+    <div class="sl-deux-grille">
+      <article class="sl-voie">
+        <span class="sl-voie-k">Formations courtes</span>
+        <h2>Progresser dès votre prochaine intervention</h2>
+        <p>Vingt-sept formations d’une dizaine de leçons&nbsp;: le jeune enfant, l’aide au quotidien, le grand âge, le handicap, l’établissement, les aidants. Attestation de fin de formation.</p>
+        <a href="#formations" class="sl-lien">Choisir une formation courte →</a>
+      </article>
+      <article class="sl-voie sl-voie-d">
+        <span class="sl-voie-k">Diplôme et titres</span>
+        <h2>CAP AEPE, titres ADVF et ASMS</h2>
+        <p>Trois préparations aux épreuves professionnelles, avec les modalités d’examen, les périodes en milieu professionnel et l’entraînement au dossier et à l’oral. La certification est délivrée par l’État&nbsp;: nous y préparons, nous ne la délivrons pas.</p>
+        <a href="#formations" class="sl-lien">Voir les trois préparations →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pubsec" id="formations">
+  <div class="wrap">
+    <h2 class="sec-title">Le plan des formations</h2>
+    <p class="sec-sub">Six lignes, trente stations, de la naissance au grand âge. Montez où vous voulez, changez de ligne quand vous voulez. Le prix est affiché sur chaque formation.</p>
+    <div class="cards3"></div>
+  </div>
+</section>
+
+<section class="pubsec sl-objections" id="objections">
+  <div class="wrap">
+    <h2 class="sec-title">Vous vous dites peut-être…</h2>
+    <dl class="sl-obj">
+      <div><dt>« Je n’ai pas le temps. »</dt><dd>Une leçon tient en quelques minutes, sur votre téléphone, entre deux interventions ou le soir. Vous avancez à votre rythme, sans horaire imposé.</dd></div>
+      <div><dt>« Le soin, ça s’apprend sur le terrain. »</dt><dd>C’est vrai, et nous le disons dans chaque formation&nbsp;: les gestes se perfectionnent auprès de professionnels. En ligne, vous apprenez les repères, les raisons et les limites, pour arriver sur le terrain plus sûr de vous.</dd></div>
+      <div><dt>« Je n’ai pas de diplôme. »</dt><dd>Les formations courtes ne demandent aucun prérequis. Pour le CAP ou un titre professionnel, nous vous préparons aux épreuves et vous expliquons comment y accéder&nbsp;; c’est l’État qui délivre la certification.</dd></div>
+      <div><dt>« Et si ça ne me convient pas ? »</dt><dd>Vous ne vous inscrivez qu’après un échange avec l’école, avec le programme, la durée et le tarif par écrit. Pas de vente forcée.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="pubsec sl-methode" id="methode">
+  <div class="wrap">
+    <div class="sl-m-tete">
+      <h2 class="sec-title">Comment ça se passe</h2>
+      <p class="sec-sub">Sur ordinateur, tablette ou téléphone, où que vous soyez en France.</p>
+    </div>
+    <ol class="sl-m-liste">
+      <li><span class="sl-m-n">01</span><div><h3>Des leçons courtes</h3><p>Chaque leçon tient en quelques minutes&nbsp;: la méthode, des exemples, l’essentiel à retenir, le piège à éviter et une mise en pratique sans risque.</p></div></li>
+      <li><span class="sl-m-n">02</span><div><h3>Des repères officiels</h3><p>Recommandations de la Haute Autorité de santé, de Santé publique France et de l’INRS, textes de loi&nbsp;: chaque repère renvoie à sa source, avec sa date.</p></div></li>
+      <li><span class="sl-m-n">03</span><div><h3>Quiz et examens blancs</h3><p>Un quiz par formation et deux examens blancs pour vérifier vos acquis, avec la correction expliquée.</p></div></li>
+      <li><span class="sl-m-n">04</span><div><h3>Une école joignable</h3><p>Une messagerie avec l’école dans votre espace élève, et une attestation de fin de formation. Pour le CAP, vous passez l’examen en candidat libre&nbsp;; pour un titre, la session a lieu dans un centre agréé.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="pubsec sl-inscription" id="inscription">
+  <div class="wrap">
+    <h2 class="sec-title">S’inscrire en quatre étapes</h2>
+    <p class="sec-sub">Une demande en ligne, un échange avec l’école, puis l’accès à vos cours.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Votre demande</h4><p>Le formulaire en ligne&nbsp;: la formation qui vous intéresse et vos coordonnées.</p></div>
+      <div class="step"><div class="n">2</div><h4>Un échange</h4><p>Par téléphone ou en visio&nbsp;: votre projet, votre niveau et le temps dont vous disposez.</p></div>
+      <div class="step"><div class="n">3</div><h4>La proposition</h4><p>Le programme, la durée et le tarif, avec les conditions générales de vente.</p></div>
+      <div class="step"><div class="n">4</div><h4>L’accès</h4><p>Votre code personnel pour l’espace élève&nbsp;: vous commencez quand vous voulez.</p></div>
+    </div>
+    <p class="sl-cta-fin"><a class="btn btn-j" href="#contact">Être rappelé·e par l’école</a></p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <div class="brand" style="margin-bottom:14px"><span class="toque"><img src="logos/logo-care-blanc.svg" alt="" width="44" height="44"></span><span class="brand-t">SWIPE LEARN SCHOOL<small>Care · aide à la personne</small></span></div>
+      <p style="font-size:.9rem;color:#D3E6DD">L’école de l’aide à la personne et de la petite enfance de Swipe Learn School, 100&nbsp;% en ligne.<span id="sw-coord"><br>40 rue de la Badouillère, 42000 Saint-Étienne<br>contact@swipeandlearn.school</span></p>
+      <p style="font-size:.86rem;margin-top:10px"><a href="https://swipelearn.school/" style="color:#fff;font-weight:700">Les écoles Swipe Learn School</a></p>
+    </div>
+    <div>
+      <h4>L’école</h4>
+      <ul>
+        <li><a href="#formations">Nos formations</a></li>
+        <li><a href="/metiers/">Nos formations par métier</a></li>
+        <li><a href="#" onclick="ouvrirModal('positionnement');return false">Positionnement &amp; évaluation</a></li><li><a href="#" onclick="ouvrirModal('certifs');return false">Attestations &amp; résultats</a></li><li><a href="#" onclick="ouvrirModal('handicap');return false">Accessibilité &amp; handicap</a></li>
+        <li><a href="#" onclick="ouvrirModal('reclamation');return false">Réclamations</a></li>
+        <li><a href="#" onclick="espace('eleve');return false">Espace élève (e-learning)</a></li>
+        <li class="sl-inst"><a href="/installer.html">Installer l’application</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Informations légales</h4>
+      <ul>
+        <li><a href="#" onclick="ouvrirModal('mentions');return false">Mentions légales</a></li>
+        <li><a href="#" onclick="ouvrirModal('cgv');return false">Conditions de vente</a></li>
+        <li><a href="#" onclick="ouvrirModal('ri');return false">Règlement intérieur</a></li>
+        <li><a href="#" onclick="ouvrirModal('rgpd');return false">Confidentialité (RGPD)</a></li>
+      </ul>
+    </div>
+    <div class="legal-strip">
+      SWIPE LEARN SCHOOL — SAS · SIRET 131 294 969 00012 · 40 rue de la Badouillère, 42000 Saint-Étienne<br>
+      Déclaration d'activité d'organisme de formation en cours d'enregistrement auprès du préfet de la région Auvergne-Rhône-Alpes · © 2026 Swipe Learn School · Care
+    </div>
+  </div>
+<!--seo-plan--><!--/seo-plan--></footer>
+</div><!-- /site-pub -->

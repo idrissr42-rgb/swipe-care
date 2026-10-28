@@ -1,0 +1,149 @@
+[
+ {
+  "s": "assistant-maternel",
+  "nom": "Assistant maternel et professionnel de la petite enfance",
+  "icone": "baby",
+  "titre": "Formation petite enfance en ligne · Care",
+  "description": "Assistante maternelle, professionnel de crèche : développement, sécurité, alimentation, Montessori, handicap et protection de l’enfant. 100 % en ligne.",
+  "intro": "L’assistant maternel accueille à son domicile, ou en maison d’assistants maternels, des enfants confiés par leurs parents ; les professionnels de crèche les accueillent en établissement. Ils veillent à la sécurité, à la santé et à l’éveil de chaque enfant.",
+  "missions": [
+   "Accueillir l’enfant et ses parents, échanger chaque jour sur sa journée",
+   "Assurer les soins du quotidien : repas, change, sommeil, hygiène",
+   "Proposer des jeux et des activités adaptés à son âge",
+   "Prévenir les accidents et savoir alerter",
+   "Repérer ce qui inquiète et en parler aux parents",
+   "Protéger l’enfant en danger et connaître les circuits de signalement"
+  ],
+  "ids": [
+   "developpement_enfant",
+   "securite_enfant",
+   "alimentation_enfant",
+   "montessori_enfant",
+   "handicap_enfant",
+   "protection_enfance",
+   "cap_aepe"
+  ],
+  "diplomes": "Care prépare en candidat libre au CAP Accompagnant éducatif petite enfance, diplôme d’État délivré par le ministère de l’Éducation nationale après réussite à l’examen. L’agrément d’assistant maternel, lui, est délivré par le conseil départemental, avec sa propre formation obligatoire."
+ },
+ {
+  "s": "garde-enfants",
+  "nom": "Garde d’enfants à domicile",
+  "icone": "users",
+  "titre": "Formation garde d’enfants à domicile en ligne · Care",
+  "description": "Garde d’enfants à domicile : le métier, le contrat, la sécurité, le développement et l’alimentation de l’enfant. Formations 100 % en ligne.",
+  "intro": "La garde d’enfants à domicile s’occupe des enfants au domicile des parents : sorties d’école, repas, devoirs, bain, jeux. Elle est employée par la famille ou par un organisme de services à la personne.",
+  "missions": [
+   "Aller chercher les enfants à l’école ou à la crèche",
+   "Préparer et donner les repas en sécurité",
+   "Accompagner les jeux, les devoirs et le coucher",
+   "Prévenir les accidents à la maison et dehors",
+   "Rendre compte aux parents de la journée"
+  ],
+  "ids": [
+   "garde_domicile",
+   "securite_enfant",
+   "developpement_enfant",
+   "alimentation_enfant",
+   "protection_enfance",
+   "tp_advf"
+  ],
+  "diplomes": "Le titre professionnel Assistant de vie aux familles comprend un certificat de compétences consacré au relais des parents dans la garde des enfants à domicile. Care y prépare ; le titre est délivré par le ministère du Travail après une session de validation dans un centre agréé."
+ },
+ {
+  "s": "auxiliaire-de-vie",
+  "nom": "Auxiliaire de vie et aide à domicile",
+  "icone": "house-line",
+  "titre": "Formation auxiliaire de vie en ligne · Care",
+  "description": "Auxiliaire de vie, aide à domicile : toilette, repas, médicaments, chutes, transferts, Alzheimer et fin de vie. Formations 100 % en ligne.",
+  "intro": "L’auxiliaire de vie aide des personnes âgées, malades ou en situation de handicap à vivre chez elles : toilette, repas, courses, entretien du logement, sorties. Elle stimule l’autonomie de la personne et fait le lien avec la famille et les soignants.",
+  "missions": [
+   "Aider à la toilette, à l’habillage et aux déplacements",
+   "Préparer les repas et aider à les prendre",
+   "Entretenir le logement et le linge",
+   "Aider à la prise des médicaments dans le cadre prévu par la loi",
+   "Prévenir les chutes et repérer ce qui change",
+   "Transmettre à la famille, à l’infirmier et à l’équipe"
+  ],
+  "ids": [
+   "tp_advf",
+   "toilette",
+   "nutrition_agee",
+   "aide_medicaments",
+   "prevention_chutes",
+   "gestes_postures",
+   "alzheimer",
+   "entretien_domicile"
+  ],
+  "diplomes": "Care prépare au titre professionnel Assistant de vie aux familles, délivré par le ministère du Travail après une session de validation dans un centre agréé ou par la validation des acquis de l’expérience."
+ },
+ {
+  "s": "agent-ehpad",
+  "nom": "Agent de service et personnel d’EHPAD",
+  "icone": "buildings",
+  "titre": "Formation agent de service en EHPAD en ligne · Care",
+  "description": "Agent de service hospitalier, agent en EHPAD : hygiène et infections, repas, bientraitance, refus de soins, urgence. Formations 100 % en ligne.",
+  "intro": "L’agent de service en établissement médico-social entretient les chambres et les espaces communs, participe au service des repas et accompagne les résidents dans certains moments du quotidien, au sein d’une équipe soignante.",
+  "missions": [
+   "Entretenir les locaux selon les protocoles d’hygiène",
+   "Participer au service des repas et à l’aide au repas",
+   "Accompagner les résidents avec respect et bienveillance",
+   "Appliquer les précautions standard",
+   "Transmettre ses observations à l’équipe soignante"
+  ],
+  "ids": [
+   "tp_asms",
+   "travailler_ehpad",
+   "hygiene_infections",
+   "bientraitance",
+   "troubles_comportement",
+   "nutrition_agee",
+   "urgence_alerte"
+  ],
+  "diplomes": "Care prépare au titre professionnel Agent de service médico-social, délivré par le ministère du Travail après une session de validation dans un centre agréé."
+ },
+ {
+  "s": "aide-soignant",
+  "nom": "Devenir aide-soignant ou auxiliaire de puériculture",
+  "icone": "stethoscope",
+  "titre": "Préparer l’entrée en IFAS ou IFAP en ligne · Care",
+  "description": "Préparez la sélection d’entrée en formation d’aide-soignant ou d’auxiliaire de puériculture : dossier, motivation, entretien. 100 % en ligne.",
+  "intro": "Les diplômes d’État d’aide-soignant et d’auxiliaire de puériculture se préparent en institut de formation (IFAS, IFAP), après une sélection sur dossier et entretien. Care ne prépare pas ces diplômes : il aide à préparer la sélection et à découvrir le métier.",
+  "missions": [
+   "Constituer un dossier de candidature complet",
+   "Écrire une lettre de motivation qui montre votre connaissance du métier",
+   "Préparer l’entretien de sélection",
+   "Découvrir l’hygiène, la communication et le travail en équipe"
+  ],
+  "ids": [
+   "selection_ifas_ifap",
+   "hygiene_infections",
+   "communication_epuisement",
+   "travailler_ehpad"
+  ],
+  "diplomes": ""
+ },
+ {
+  "s": "proche-aidant",
+  "nom": "Proche aidant",
+  "icone": "hands-praying",
+  "titre": "Formation proche aidant en ligne · Care",
+  "description": "Vous aidez un proche âgé, malade ou en situation de handicap : vos droits, le répit, Alzheimer, chutes, fin de vie. Formations 100 % en ligne.",
+  "intro": "Le proche aidant accompagne au quotidien un parent, un conjoint ou un enfant qui a perdu de son autonomie. Il a des droits, des soutiens et des solutions de répit, souvent mal connus.",
+  "missions": [
+   "Connaître vos droits et les aides de la personne aidée",
+   "Organiser l’aide et trouver du répit",
+   "Comprendre la maladie de votre proche et communiquer avec lui",
+   "Prévenir les chutes et adapter le logement",
+   "Prendre soin de votre propre santé"
+  ],
+  "ids": [
+   "proches_aidants",
+   "alzheimer",
+   "prevention_chutes",
+   "fin_de_vie",
+   "communication_epuisement",
+   "handicap_domicile"
+  ],
+  "diplomes": ""
+ }
+]

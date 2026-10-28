@@ -1,0 +1,297 @@
+{
+ "accueil": {
+  "titre": "Formations aide à la personne et petite enfance · Care",
+  "description": "Petite enfance, aide à domicile, grand âge, handicap, CAP AEPE, titres ADVF et ASMS : formations 100 % en ligne, sourcées, avec quiz et examens blancs."
+ },
+ "formations": [
+  {
+   "id": "cap_aepe",
+   "icone": "baby-carriage",
+   "court": "CAP AEPE",
+   "accroche": "Préparer le CAP Accompagnant éducatif petite enfance en candidat libre : les épreuves professionnelles, les périodes en milieu professionnel, le dossier et l’oral."
+  },
+  {
+   "id": "tp_advf",
+   "icone": "house-line",
+   "court": "Titre pro ADVF",
+   "accroche": "Préparer le titre professionnel Assistant de vie aux familles : entretien du logement, accompagnement de la personne, relais des parents, dossier professionnel et session de validation."
+  },
+  {
+   "id": "tp_asms",
+   "icone": "hospital",
+   "court": "Titre pro ASMS",
+   "accroche": "Préparer le titre professionnel Agent de service médico-social : hygiène des locaux, aide aux repas et accompagnement des résidents, dossier professionnel et session de validation."
+  },
+  {
+   "id": "selection_ifas_ifap",
+   "icone": "identification-card",
+   "court": "Sélection IFAS et IFAP",
+   "accroche": "Réussir la sélection d’entrée en formation d’aide-soignant ou d’auxiliaire de puériculture : le dossier, la lettre de motivation, l’entretien et le calendrier."
+  },
+  {
+   "id": "developpement_enfant",
+   "icone": "baby",
+   "court": "Développement de l’enfant",
+   "accroche": "Comprendre le développement du jeune enfant de la naissance à six ans, le soutenir au quotidien par le jeu et la parole, et savoir quand en parler aux parents."
+  },
+  {
+   "id": "securite_enfant",
+   "icone": "shield-check",
+   "court": "Sécurité du jeune enfant",
+   "accroche": "Prévenir les accidents de la vie courante, coucher un bébé en sécurité, protéger du syndrome du bébé secoué et savoir alerter les secours."
+  },
+  {
+   "id": "alimentation_enfant",
+   "icone": "bowl-food",
+   "court": "Alimentation du jeune enfant",
+   "accroche": "Le lait, la diversification, les allergènes, la préparation et la conservation des biberons et des repas en sécurité, selon les repères officiels."
+  },
+  {
+   "id": "montessori_enfant",
+   "icone": "shapes",
+   "court": "Montessori de 0 à 6 ans",
+   "accroche": "Les principes de la pédagogie Montessori appliqués au quotidien du jeune enfant, à la maison, chez l’assistante maternelle ou en crèche."
+  },
+  {
+   "id": "handicap_enfant",
+   "icone": "puzzle-piece",
+   "court": "Enfant en situation de handicap",
+   "accroche": "Accueillir un enfant en situation de handicap ou avec un trouble du neurodéveloppement : repérer, adapter, orienter vers les bons interlocuteurs, travailler avec les parents."
+  },
+  {
+   "id": "garde_domicile",
+   "icone": "users",
+   "court": "Garde d’enfants à domicile",
+   "accroche": "Le métier de garde d’enfants à domicile : contrat, journée type, sorties d’école, sécurité, relation avec les parents et aides de la famille."
+  },
+  {
+   "id": "protection_enfance",
+   "icone": "hand-heart",
+   "court": "Protéger l’enfant",
+   "accroche": "Repérer les signes de violences faites aux enfants, recueillir la parole sans l’orienter, et savoir qui alerter : 119, information préoccupante, signalement."
+  },
+  {
+   "id": "toilette",
+   "icone": "drop",
+   "court": "Aide à la toilette",
+   "accroche": "Aider à la toilette dans le respect de la pudeur et du consentement : au lavabo, au lit, à la douche, soins de bouche, change et prévention des escarres."
+  },
+  {
+   "id": "nutrition_agee",
+   "icone": "fork-knife",
+   "court": "Repas et dénutrition",
+   "accroche": "Repérer la dénutrition, aider au repas, adapter les textures, faire boire et garder le plaisir de manger chez la personne âgée."
+  },
+  {
+   "id": "entretien_domicile",
+   "icone": "broom",
+   "court": "Entretien du domicile et du linge",
+   "accroche": "Entretenir le logement et le linge chez la personne aidée : méthodes, produits sans danger, hygiène, organisation et respect de ses habitudes."
+  },
+  {
+   "id": "aide_medicaments",
+   "icone": "pill",
+   "court": "Aide à la prise des médicaments",
+   "accroche": "Ce que la loi permet à l’aidant professionnel, ce qui relève de l’infirmier, et comment observer et transmettre sans jamais se tromper de rôle."
+  },
+  {
+   "id": "prevention_chutes",
+   "icone": "person-simple-walk",
+   "court": "Prévenir les chutes",
+   "accroche": "Repérer les risques de chute, aménager le logement, encourager l’activité et savoir réagir après une chute."
+  },
+  {
+   "id": "gestes_postures",
+   "icone": "person-arms-spread",
+   "court": "Gestes, postures et transferts",
+   "accroche": "Mobiliser et transférer une personne sans vous blesser, avec les aides techniques et en préservant son autonomie."
+  },
+  {
+   "id": "alzheimer",
+   "icone": "brain",
+   "court": "Maladie d’Alzheimer",
+   "accroche": "Comprendre la maladie d’Alzheimer et les maladies apparentées, communiquer, organiser le quotidien et soutenir l’aidant familial."
+  },
+  {
+   "id": "montessori_agee",
+   "icone": "flower-lotus",
+   "court": "Montessori et grand âge",
+   "accroche": "L’approche Montessori adaptée aux personnes âgées : des activités qui ont du sens, des rôles sociaux, un environnement qui aide à faire seul."
+  },
+  {
+   "id": "fin_de_vie",
+   "icone": "sun-horizon",
+   "court": "Fin de vie et soins palliatifs",
+   "accroche": "Accompagner une personne en fin de vie et ses proches : droits du patient, confort, présence, deuil, et prendre soin de soi."
+  },
+  {
+   "id": "bientraitance",
+   "icone": "heart",
+   "court": "Bientraitance",
+   "accroche": "Promouvoir la bientraitance, repérer la maltraitance des personnes vulnérables et savoir signaler, dans le respect des droits de la personne."
+  },
+  {
+   "id": "troubles_comportement",
+   "icone": "chats-circle",
+   "court": "Agitation et refus de soins",
+   "accroche": "Comprendre l’agitation, l’agressivité et le refus de soins, désamorcer sans contraindre, et transmettre à l’équipe."
+  },
+  {
+   "id": "handicap_domicile",
+   "icone": "wheelchair",
+   "court": "Handicap à domicile",
+   "accroche": "Accompagner un adulte en situation de handicap chez lui : ses droits, ses choix, la communication adaptée, les aides techniques et la vie sociale."
+  },
+  {
+   "id": "hygiene_infections",
+   "icone": "hand-soap",
+   "court": "Hygiène et infections",
+   "accroche": "Les précautions standard, l’hygiène des mains, les équipements de protection, le bionettoyage, le linge et les déchets, à domicile et en établissement."
+  },
+  {
+   "id": "travailler_ehpad",
+   "icone": "buildings",
+   "court": "Travailler en EHPAD",
+   "accroche": "L’établissement, l’équipe et le rôle de chacun, les transmissions, la journée type et les droits des résidents."
+  },
+  {
+   "id": "urgence_alerte",
+   "icone": "siren",
+   "court": "Repérer l’urgence et alerter",
+   "accroche": "Reconnaître une situation grave chez l’enfant ou l’adulte, passer l’alerte au bon numéro et protéger en attendant les secours. Ne remplace pas le PSC1."
+  },
+  {
+   "id": "sante_mentale",
+   "icone": "lifebuoy",
+   "court": "Santé mentale : repérer et orienter",
+   "accroche": "Repérer une souffrance psychique chez une personne accompagnée ou un proche, écouter sans juger et orienter vers la bonne ressource."
+  },
+  {
+   "id": "proches_aidants",
+   "icone": "hands-praying",
+   "court": "Proches aidants",
+   "accroche": "Vos droits et vos soutiens quand vous aidez un proche : congé, répit, aides, organisation, et prévenir votre propre épuisement."
+  },
+  {
+   "id": "communication_epuisement",
+   "icone": "smiley",
+   "court": "Communication et épuisement",
+   "accroche": "Communiquer avec bienveillance avec les personnes, les familles et l’équipe, et prévenir l’épuisement professionnel dans les métiers du soin."
+  },
+  {
+   "id": "creer_sap",
+   "icone": "rocket-launch",
+   "court": "Créer son activité de services à la personne",
+   "accroche": "Statut, déclaration, autorisation ou agrément, crédit d’impôt de vos clients, tarifs et premiers clients : lancer votre activité en règle."
+  }
+ ],
+ "lignes": [
+  {
+   "n": 1,
+   "nom": "Diplômes et sélections",
+   "c": "#1F5E52",
+   "ids": [
+    "cap_aepe",
+    "tp_advf",
+    "tp_asms",
+    "selection_ifas_ifap"
+   ],
+   "public": "Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture."
+  },
+  {
+   "n": 2,
+   "nom": "Petite enfance",
+   "c": "#C9761F",
+   "ids": [
+    "developpement_enfant",
+    "securite_enfant",
+    "alimentation_enfant",
+    "montessori_enfant",
+    "handicap_enfant",
+    "garde_domicile",
+    "protection_enfance"
+   ],
+   "public": "Assistantes maternelles, gardes d’enfants à domicile, professionnels de crèche, parents et personnes en reconversion vers la petite enfance."
+  },
+  {
+   "n": 3,
+   "nom": "Aide à domicile",
+   "c": "#2E78B0",
+   "ids": [
+    "toilette",
+    "nutrition_agee",
+    "entretien_domicile",
+    "aide_medicaments",
+    "prevention_chutes",
+    "gestes_postures"
+   ],
+   "public": "Auxiliaires de vie, aides à domicile, assistants de vie aux familles et personnes qui débutent dans l’aide à la personne."
+  },
+  {
+   "n": 4,
+   "nom": "Grand âge et handicap",
+   "c": "#7A5BA6",
+   "ids": [
+    "alzheimer",
+    "montessori_agee",
+    "fin_de_vie",
+    "bientraitance",
+    "troubles_comportement",
+    "handicap_domicile"
+   ],
+   "public": "Professionnels qui accompagnent des personnes âgées ou en situation de handicap, à domicile ou en établissement."
+  },
+  {
+   "n": 5,
+   "nom": "En établissement",
+   "c": "#B5453D",
+   "ids": [
+    "hygiene_infections",
+    "travailler_ehpad",
+    "urgence_alerte",
+    "sante_mentale"
+   ],
+   "public": "Agents de service, personnels d’EHPAD et de structures médico-sociales, et tous ceux qui travaillent auprès de personnes vulnérables."
+  },
+  {
+   "n": 6,
+   "nom": "Aidants et métier",
+   "c": "#56703A",
+   "ids": [
+    "proches_aidants",
+    "communication_epuisement",
+    "creer_sap"
+   ],
+   "public": "Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne."
+  }
+ ],
+ "couleurs": {
+  "#2E5BE3": "#17413A",
+  "#2B5BE3": "#17413A",
+  "#2F55D4": "#17413A",
+  "#1E3FA8": "#0F2F29",
+  "#7C97EA": "#3F7A6C",
+  "#17265C": "#132E29",
+  "#1B2552": "#132E29",
+  "#EDF2FF": "#F3F8F5",
+  "#CBD5F5": "#D3E6DD",
+  "#5C6B94": "#56685F",
+  "#6B76A8": "#66766E",
+  "#4A5588": "#45564E",
+  "#3A4370": "#36463F",
+  "#2D2F6B": "#22403A",
+  "#EEF0F8": "#EEF4F0",
+  "#E3E6F2": "#E2ECE6",
+  "#DDE3F5": "#DCE9E2",
+  "#DDE2F3": "#DCE9E2",
+  "#F4F6FC": "#F6FAF7",
+  "#E1E5F3": "#E0EBE5",
+  "#F2B01E": "#6CC3A2",
+  "#F4AE1F": "#6CC3A2",
+  "#FFE7A3": "#CDEEDF",
+  "#FBEED2": "#E2F4EB",
+  "#FFFBEF": "#F4FBF7",
+  "#9A6B0B": "#1F5E4C",
+  "#C5502B": "#B5573F"
+ }
+}

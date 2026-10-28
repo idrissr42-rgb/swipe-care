@@ -1,0 +1,16 @@
+# Care — site de l'école de l'aide à la personne (Netlify). Pas de commande de construction : les pages sont produites
+# par les outils (outils/seo/generer.mjs) et publiées telles quelles depuis public/.
+[build]
+  publish = "public"
+[functions]
+  directory = "netlify/functions"
+
+# application installable : le service worker est toujours relu
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

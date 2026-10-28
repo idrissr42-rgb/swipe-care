@@ -1,0 +1,69 @@
+{
+ "groupe": "Swipe Learn School",
+ "ecoles": [
+  {
+   "cle": "groupe",
+   "nom": "Swipe Learn School",
+   "couleur": "#c89b2d",
+   "logo": "logos/logo-groupe.svg",
+   "logoBlanc": "logos/logo-groupe-blanc.svg",
+   "icone": "logos/icone-groupe.svg"
+  },
+  {
+   "cle": "cook",
+   "nom": "Swipe Learn School · Cook",
+   "couleur": "#2f55d4",
+   "logo": "logos/logo-cook.svg",
+   "logoBlanc": "logos/logo-cook-blanc.svg",
+   "icone": "logos/icone-cook.svg"
+  },
+  {
+   "cle": "care",
+   "nom": "Swipe Learn School · Care",
+   "couleur": "#3d9a7e",
+   "logo": "logos/logo-care.svg",
+   "logoBlanc": "logos/logo-care-blanc.svg",
+   "icone": "logos/icone-care.svg"
+  },
+  {
+   "cle": "build",
+   "nom": "Swipe Learn School · Build",
+   "couleur": "#bc8a2e",
+   "logo": "logos/logo-build.svg",
+   "logoBlanc": "logos/logo-build-blanc.svg",
+   "icone": "logos/icone-build.svg"
+  },
+  {
+   "cle": "drive",
+   "nom": "Swipe Learn School · Drive",
+   "couleur": "#a94442",
+   "logo": "logos/logo-drive.svg",
+   "logoBlanc": "logos/logo-drive-blanc.svg",
+   "icone": "logos/icone-drive.svg"
+  },
+  {
+   "cle": "sell",
+   "nom": "Swipe Learn School · Sell",
+   "couleur": "#e8681c",
+   "logo": "logos/logo-sell.svg",
+   "logoBlanc": "logos/logo-sell-blanc.svg",
+   "icone": "logos/icone-sell.svg"
+  },
+  {
+   "cle": "code",
+   "nom": "Swipe Learn School · Code",
+   "couleur": "#7b6aa8",
+   "logo": "logos/logo-code.svg",
+   "logoBlanc": "logos/logo-code-blanc.svg",
+   "icone": "logos/icone-code.svg"
+  },
+  {
+   "cle": "manage",
+   "nom": "Swipe Learn School · Manage",
+   "couleur": "#9c4f82",
+   "logo": "logos/logo-manage.svg",
+   "logoBlanc": "logos/logo-manage-blanc.svg",
+   "icone": "logos/icone-manage.svg"
+  }
+ ]
+}

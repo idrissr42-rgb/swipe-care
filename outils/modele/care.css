@@ -1,0 +1,150 @@
+/* ===== CARE — styles propres, même typographie que les autres écoles (Baloo 2 et Nunito) ===== */
+:root{--sl-serif:'Baloo 2',cursive;--sl-creme:#EAF3EE;--sl-ligne:rgba(19,46,41,.12)}
+h1,h2,h3,.sec-title,.sl-voie h2,.sl-m-liste h3,.step h4,.brand{font-family:var(--sl-serif);font-weight:800}
+.sec-title{font-weight:800}
+.sec-sub{font-size:1.02rem}
+.brand-t{font-family:var(--sl-serif);font-weight:800}
+.brand-t small{font-family:'Nunito',sans-serif;letter-spacing:.14em;font-size:.6rem;text-transform:uppercase;color:#A9DCC8}
+nav.pub ul a{font-size:.9rem}
+nav.pub ul a.cta{background:var(--jaune)}
+
+/* --- accueil --- */
+.sl-hero{padding:70px 0 110px}
+/* grain retiré */.sl-grain{display:none;position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:3px 3px;mix-blend-mode:overlay}
+.sl-hero .wrap{grid-template-columns:1.15fr .85fr;gap:56px}
+.sl-hero .badge-rouille.sl-sur{margin-bottom:20px}
+.sl-hero h1{font-weight:800}
+.sl-hero h1 .j{color:var(--jaune)}
+.sl-hero p{font-size:1.06rem;line-height:1.65;max-width:56ch;opacity:.9;margin:22px 0 30px}
+.sl-hero .btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;font-size:1rem}
+.sl-hero .btn-ghost{border-color:rgba(255,255,255,.45)}
+.sl-preuves{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;margin:30px 0 0;padding:0;font-size:.9rem;font-weight:700;color:#D3E6DD}
+.sl-preuves li{position:relative;padding-left:22px}
+.sl-preuves li::before{content:"";position:absolute;left:0;top:.42em;width:10px;height:6px;border-left:2.5px solid var(--jaune);border-bottom:2.5px solid var(--jaune);transform:rotate(-45deg)}
+/* le dialogue : trois bulles qui racontent une situation */
+.sl-dialogue{min-height:0;display:flex;flex-direction:column;gap:14px;padding:18px 0 34px 10px;animation:monte .8s ease both;animation-delay:.2s}
+.sl-bulle{position:relative;max-width:88%;border-radius:20px;padding:14px 18px 15px;font-size:1.02rem;line-height:1.45;font-weight:700;box-shadow:0 18px 40px rgba(6,24,20,.35)}
+.sl-bulle small{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin-bottom:5px;opacity:.75}
+.sl-client{align-self:flex-start;background:#fff;color:var(--encre);border-bottom-left-radius:6px;font-family:var(--sl-serif);font-size:1.3rem;font-weight:800}
+.sl-client small{font-family:'Nunito',sans-serif;color:#56685F}
+.sl-vendeur{align-self:flex-end;background:var(--jaune);color:var(--encre);border-bottom-right-radius:6px}
+.sl-vendeur small{color:#134034}
+.sl-note{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:.95rem;backdrop-filter:blur(6px)}
+.sl-note small{color:#A9DCC8}
+.sl-etiquette{align-self:flex-end;margin-top:4px;background:var(--encre);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 16px;font-size:.84rem;font-weight:700}
+.sl-etiquette b{color:var(--jaune);font-family:var(--sl-serif);font-weight:800;margin-right:6px}
+
+/* --- chiffres : une réglette blanche, chiffres en serif --- */
+.sl-chiffres{margin-top:-62px}
+.sl-chiffres .chiffres-grid{border-radius:18px;box-shadow:0 24px 60px rgba(19,46,41,.16);padding:24px 10px;gap:0}
+.sl-chiffres .chiffres-grid>div{padding:4px 10px;border-left:1px solid var(--sl-ligne)}
+.sl-chiffres .chiffres-grid>div:first-child{border-left:0}
+.sl-chiffres .compteur{font-family:var(--sl-serif);font-weight:800;font-size:2.2rem;line-height:1;color:var(--bleu)!important}
+.sl-chiffres .chiffres-grid>div:nth-child(even) .compteur{color:var(--rouille)!important}
+.sl-chiffres small{margin-top:6px}
+
+/* --- deux voies : courtes ou diplômes --- */
+.sl-deux{padding-bottom:10px}
+.sl-deux-grille{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.sl-voie{background:var(--sl-creme);border-radius:22px;padding:34px 32px 30px;display:flex;flex-direction:column;gap:12px}
+.sl-voie-k{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--rouille)}
+.sl-voie h2{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.12;margin:0}
+.sl-voie p{color:var(--gris);font-size:.98rem;margin:0}
+.sl-lien{margin-top:auto;padding-top:8px;font-weight:800;color:var(--encre);text-decoration:none;border-bottom:2px solid var(--jaune);align-self:flex-start}
+.sl-lien:hover{color:var(--rouille)}
+.sl-voie-d{background:var(--rouille);color:#fff}
+.sl-voie-d .sl-voie-k{color:#FFE3DA}
+.sl-voie-d p{color:#FFF3EE}
+.sl-voie-d .sl-lien{color:#fff}
+
+/* --- comment ça se passe : liste éditoriale numérotée --- */
+.sl-m-tete{margin-bottom:6px}
+.sl-m-liste{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;border-top:1px solid var(--sl-ligne)}
+.sl-m-liste li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:26px 0;border-bottom:1px solid var(--sl-ligne)}
+.sl-m-n{font-family:var(--sl-serif);font-weight:800;font-size:2.2rem;line-height:1;color:var(--jaune);display:block;width:auto;height:auto;background:none;border-radius:0;margin:0}
+.sl-m-liste h3{font-size:1.25rem;margin:4px 0 6px}
+.sl-m-liste p{font-size:.94rem;color:var(--gris);margin:0}
+
+/* --- inscription --- */
+.sl-inscription{background:#fff}
+.sl-inscription .step{box-shadow:none;border:1px solid var(--sl-ligne);text-align:left}
+.sl-inscription .step .n{margin:0 0 12px;font-family:var(--sl-serif);background:var(--encre);color:#fff}
+.sl-inscription .step h4{font-size:1.15rem}
+.sl-cta-fin{text-align:center;margin-top:30px}
+.sl-cta-fin .btn{min-height:50px;display:inline-flex;align-items:center;padding:14px 30px}
+
+/* --- plan des formations : un peu plus d'air --- */
+#formations .sec-sub{margin-bottom:30px}
+
+/* --- téléphone --- */
+@media (max-width:900px){.sl-deux-grille,.sl-m-liste{grid-template-columns:1fr}.sl-hero .wrap{grid-template-columns:1fr;gap:28px}}
+@media (max-width:700px){
+  .sl-hero{padding:38px 0 96px}
+  .sl-hero h1{font-size:clamp(2.35rem,9.2vw,3rem)}
+  .sl-hero p{font-size:1rem;margin:18px 0 22px}
+  .sl-hero .btns{flex-direction:column;gap:10px}
+  .sl-hero .btn{width:100%}
+  .sl-preuves{flex-direction:column;gap:8px;margin-top:22px}
+  .sl-dialogue{padding:6px 0 0;gap:10px;width:100%!important;display:flex!important}
+  .sl-bulle{max-width:92%;font-size:.98rem;padding:12px 15px 13px}
+  .sl-client{font-size:1.18rem}
+  .sl-chiffres{margin-top:-58px}
+  .sl-chiffres .chiffres-grid{grid-template-columns:1fr 1fr;gap:14px 0;padding:18px 6px}
+  .sl-chiffres .chiffres-grid>div:nth-child(3){border-left:0}
+  .sl-chiffres .compteur{font-size:2rem}
+  .sl-chiffres small{font-size:.7rem;letter-spacing:.06em}
+  .sl-voie{padding:26px 20px 24px}
+  .sl-m-liste li{grid-template-columns:48px 1fr;padding:20px 0}
+  .sl-m-n{font-size:1.8rem}
+  #inscription .steps{display:flex!important;flex-direction:column;gap:10px}
+  #inscription .step{display:grid!important;grid-template-columns:44px 1fr;column-gap:14px;padding:16px!important;align-items:start}
+  #inscription .step .n{grid-row:span 2;margin:0!important;width:40px!important;height:40px!important;font-size:1.1rem!important}
+  #inscription .step h4{margin:2px 0 2px!important}
+  #inscription .step p{margin:0!important}
+}
+@media (prefers-reduced-motion:reduce){.sl-dialogue{animation:none}}
+@media (display-mode:standalone){.sl-inst{display:none}}
+
+/* fiche formation : un tableau ou un mot long de l'extrait ne doit jamais élargir la page sur téléphone */
+#sw-fiche .fi-grid>div{min-width:0}
+#sw-fiche .fi-extrait table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+#sw-fiche .fi-extrait{overflow-wrap:anywhere}
+/* Plan des formations sur téléphone : titre sur sa ligne quand la station porte un badge de diplôme */
+@media (max-width:760px){
+  .mp-s{flex-wrap:wrap;row-gap:4px}
+  .mp-s:has(.mp-dip) b{flex:1 1 100%}
+  .mp-s .mp-dip{margin-top:0;white-space:nowrap}
+  .mp-s .mp-voir{white-space:nowrap}
+}
+
+/* --- l'offre : ce que l'élève obtient --- */
+.sl-offre{padding-bottom:12px}
+.sl-offre-grille{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.sl-offre-txt h2{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;margin:8px 0 14px}
+.sl-offre-txt p{color:var(--gris);font-size:1rem}
+.sl-offre-note{margin-top:14px;padding:12px 16px;border-left:3px solid var(--jaune);background:#fff;color:var(--encre)!important;font-weight:700;font-size:.94rem!important}
+.sl-pile{list-style:none;margin:0;padding:0;background:#fff;border-radius:22px;border:1px solid var(--sl-ligne);overflow:hidden}
+.sl-pile li{display:grid;grid-template-columns:34px 1fr;gap:2px 12px;padding:16px 20px;border-top:1px solid var(--sl-ligne)}
+.sl-pile li:first-child{border-top:0}
+.sl-pile li::before{content:"";grid-row:span 2;width:22px;height:22px;border-radius:50%;background:var(--jaune);margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%2316213A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:16px;background-position:center;background-repeat:no-repeat}
+.sl-pile b{display:block;font-family:var(--sl-serif);font-size:1.12rem;font-weight:600;margin-bottom:2px}
+.sl-pile span{display:block;color:var(--gris);font-size:.92rem}
+/* --- objections --- */
+.sl-objections{background:#fff}
+.sl-obj{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0}
+.sl-obj>div{background:var(--sl-creme);border-radius:18px;padding:22px 22px 20px}
+.sl-obj dt{font-family:var(--sl-serif);font-weight:800;font-size:1.25rem;margin-bottom:8px}
+.sl-obj dd{margin:0;color:var(--gris);font-size:.95rem}
+.sl-quand{margin:26px auto 0;max-width:70ch;text-align:center;font-size:.98rem;color:var(--encre);background:var(--jaune);color:var(--encre);border-radius:18px;padding:18px 22px}
+.sl-quand b{color:var(--encre);font-family:var(--sl-serif);font-weight:800;font-size:1.15rem;display:block;margin-bottom:4px}
+@media (max-width:900px){.sl-offre-grille,.sl-obj{grid-template-columns:1fr}}
+@media (max-width:700px){.sl-pile li{padding:14px 16px}.sl-obj>div{padding:18px}.sl-quand{text-align:left}}
+
+/* bandeau du menu en vert (logo et liens en blanc, bouton d'inscription en vert profond) */
+nav.pub{background:#2B7A63;box-shadow:0 4px 18px rgba(31,94,76,.25)}
+nav.pub .brand-t small{color:#D6F0E6}
+nav.pub ul a{color:#fff}
+nav.pub ul a:hover{background:rgba(255,255,255,.2)}
+nav.pub ul a.cta{background:var(--encre);color:#fff}
+nav.pub ul.sw-ouvert{background:#2B7A63!important}
+nav.pub .sw-burger{background:rgba(255,255,255,.22)}

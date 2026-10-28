@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Installer l’application Care · Swipe Learn School</title>
+<meta name="description" content="Installez l’application Care sur votre téléphone, sans passer par un store : vos cours, vos documents et vos messages en un geste.">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2B7A63">
+<link rel="icon" type="image/svg+xml" href="/logos/icone-care.svg">
+<link rel="apple-touch-icon" href="/icones/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Care">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bleu:#17413A;--encre:#132E29;--jaune:#6CC3A2;--fond:#F5F9F6;--carte:#FFFFFF;--doux:#45564E}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--fond);color:var(--encre);font-family:Nunito,Arial,sans-serif;font-size:17px;line-height:1.55}
+main{max-width:520px;margin:0 auto;padding:28px 18px 40px}
+.marque{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.marque img{width:52px;height:52px;border-radius:14px}
+.marque b{display:block;font-family:'Baloo 2',Nunito,sans-serif;font-size:1.05rem;line-height:1.1}
+.marque small{color:var(--doux);font-weight:700}
+h1{font-family:'Baloo 2',Nunito,sans-serif;font-size:2.1rem;line-height:1.05;letter-spacing:-.02em;margin:0 0 12px}
+.intro{margin:0 0 24px}
+.bloc{background:var(--carte);border-radius:20px;padding:20px}
+.bouton{display:block;width:100%;border:0;border-radius:999px;background:var(--bleu);color:#fff;font-family:'Baloo 2',Nunito,sans-serif;font-weight:800;font-size:1.2rem;padding:15px 20px;text-align:center;text-decoration:none;cursor:pointer}
+.bouton:disabled{opacity:.55;cursor:default}
+.bouton:focus-visible,.lien:focus-visible{outline:3px solid var(--encre);outline-offset:3px}
+.lien{display:inline-block;margin-top:18px;color:var(--bleu);font-weight:800}
+ol{margin:0;padding-left:1.3em}
+ol li{margin:0 0 12px}
+.ic{display:inline-block;vertical-align:-4px;width:22px;height:22px}
+.note{font-size:.95rem;color:var(--doux);margin:14px 0 0}
+.ok{background:#E6F6EE;color:#0F5C36;border-radius:16px;padding:14px 16px;font-weight:700}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="marque"><img src="/icones/icone-192.png" alt=""><div><b>Swipe Learn School · Care</b><small>L’école de l’aide à la personne</small></div></div>
+  <h1>Installez l’application Care</h1>
+  <p class="intro">Vos cours, vos documents et vos messages, en un geste depuis l’écran d’accueil de votre téléphone. Gratuit, sans passer par un store, en quelques secondes.</p>
+
+  <!-- Android et ordinateur : le navigateur sait installer -->
+  <div class="bloc" id="z-bouton" hidden>
+    <button class="bouton" id="installer" type="button">Installer l’application</button>
+    <p class="note">Votre téléphone vous demande de confirmer : touchez « Installer ».</p>
+  </div>
+
+  <!-- iPhone et iPad -->
+  <div class="bloc" id="z-ios" hidden>
+    <ol>
+      <li>Touchez <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> <b>Partager</b>, en bas de l’écran (ou en haut sur iPad).</li>
+      <li>Faites défiler, puis touchez <b>« Sur l’écran d’accueil »</b>.</li>
+      <li>Touchez <b>« Ajouter »</b> : l’icône Care apparaît sur votre écran d’accueil.</li>
+    </ol>
+    <p class="note">Vous ne voyez pas « Sur l’écran d’accueil » ? Ouvrez cette page dans Safari, puis recommencez.</p>
+  </div>
+
+  <!-- Android sans bouton (application Gmail, autre navigateur) -->
+  <div class="bloc" id="z-android" hidden>
+    <ol>
+      <li>Touchez <b>⋮</b>, en haut à droite de l’écran.</li>
+      <li>Touchez <b>« Installer l’application »</b> ou <b>« Ajouter à l’écran d’accueil »</b>.</li>
+      <li>Confirmez : l’icône Care apparaît sur votre écran d’accueil.</li>
+    </ol>
+    <p class="note">Vous avez ouvert ce lien depuis l’application Gmail ou un réseau social ? Touchez <b>⋮</b> puis <b>« Ouvrir dans Chrome »</b>, et recommencez.</p>
+    <p class="note">L’application est déjà installée ? Le menu <b>⋮</b> affiche alors <b>« Ouvrir dans l’application »</b> : touchez-le, ou ouvrez directement l’icône Care de votre écran d’accueil.</p>
+  </div>
+
+  <!-- Samsung Internet : l'application qu'il fabrique est bloquée par Android (Play Protect) ; Chrome installe sans alerte -->
+  <div class="bloc" id="z-samsung" hidden>
+    <p style="margin:0 0 14px">Sur ce téléphone, installez l’application depuis <b>Chrome</b> : c’est plus sûr et Android ne vous bloquera pas.</p>
+    <a class="bouton" id="vers-chrome" href="#">Ouvrir dans Chrome</a>
+    <p class="note">Ensuite, touchez <b>« Installer l’application »</b>. Si Samsung Internet vous a affiché « Appli non sécurisée bloquée », c’est une alerte liée à ce navigateur, pas à l’école : touchez « OK » et passez par Chrome.</p>
+  </div>
+
+  <!-- déjà installée -->
+  <div class="ok" id="z-fait" hidden><span id="z-fait-t">C’est installé. Retrouvez l’icône Care sur votre écran d’accueil, et ouvrez-la quand vous voulez.</span></div>
+
+  <a class="lien" href="/#espace-eleve">Ouvrir mon espace élève sans installer</a>
+</main>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var ua = navigator.userAgent || '';
+  var ios = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var android = /android/i.test(ua);
+  var samsung = android && /SamsungBrowser/i.test(ua);
+  var installee = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  var invite = null;
+  function montrer(id){ ['z-bouton','z-ios','z-android','z-samsung','z-fait'].forEach(function(z){ $(z).hidden = (z !== id); }); }
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(function(){});
+  if (installee) { montrer('z-fait'); return; }
+  // déjà installée sur ce téléphone (Chrome sur Android sait le dire) : on le dit tout de suite
+  if (navigator.getInstalledRelatedApps) {
+    navigator.getInstalledRelatedApps().then(function(l){
+      if (l && l.length) { $('z-fait-t').textContent = 'Care est déjà installée sur ce téléphone. Ouvrez-la depuis l’icône Care de votre écran d’accueil.'; montrer('z-fait'); }
+    }).catch(function(){});
+  }
+  if (ios) { montrer('z-ios'); return; }
+  if (samsung) {
+    var ici = location.host + location.pathname;
+    $('vers-chrome').href = 'intent://' + ici + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent('https://play.google.com/store/apps/details?id=com.android.chrome') + ';end';
+    montrer('z-samsung'); return;
+  }
+  // sinon : on attend que le navigateur propose l'installation ; à défaut, les gestes à la main
+  montrer(android ? 'z-android' : 'z-bouton');
+  if (!android) { $('installer').disabled = true; }
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); invite = e; $('installer').disabled = false; montrer('z-bouton');
+  });
+  $('installer').addEventListener('click', function(){
+    if (!invite) return;
+    invite.prompt();
+    var i = invite; invite = null;
+    if (i.userChoice) i.userChoice.then(function(r){ if (!r || r.outcome !== 'accepted') { $('installer').disabled = true; montrer(android ? 'z-android' : 'z-bouton'); } });
+  });
+  window.addEventListener('appinstalled', function(){ montrer('z-fait'); });
+  // ordinateur sans proposition au bout de 4 s : expliquer le menu du navigateur
+  setTimeout(function(){
+    if (!invite && !android && $('z-fait').hidden) {
+      var b = $('z-bouton'); if (!b.hidden && $('installer').disabled) {
+        b.innerHTML = '<p style="margin:0">Dans la barre d’adresse ou le menu de votre navigateur, choisissez <b>« Installer Care »</b> ou <b>« Installer l’application »</b>. Sur téléphone, ouvrez plutôt ce lien sur votre téléphone.</p>';
+      }
+    }
+  }, 4000);
+})();
+</script>
+</body>
+</html>
