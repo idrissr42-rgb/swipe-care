@@ -21,7 +21,8 @@
    "montessori_enfant",
    "handicap_enfant",
    "protection_enfance",
-   "cap_aepe"
+   "cap_aepe",
+   "vae_deap"
   ],
   "diplomes": "Care prépare en candidat libre au CAP Accompagnant éducatif petite enfance, diplôme d’État délivré par le ministère de l’Éducation nationale après réussite à l’examen. L’agrément d’assistant maternel, lui, est délivré par le conseil départemental, avec sa propre formation obligatoire."
  },
@@ -72,7 +73,9 @@
    "prevention_chutes",
    "gestes_postures",
    "alzheimer",
-   "entretien_domicile"
+   "entretien_domicile",
+   "vae_deaes",
+   "bac_assp"
   ],
   "diplomes": "Care prépare au titre professionnel Assistant de vie aux familles, délivré par le ministère du Travail après une session de validation dans un centre agréé ou par la validation des acquis de l’expérience."
  },
@@ -97,7 +100,9 @@
    "bientraitance",
    "troubles_comportement",
    "nutrition_agee",
-   "urgence_alerte"
+   "urgence_alerte",
+   "cap_aagga",
+   "vae_deas"
   ],
   "diplomes": "Care prépare au titre professionnel Agent de service médico-social, délivré par le ministère du Travail après une session de validation dans un centre agréé."
  },
@@ -118,9 +123,12 @@
    "selection_ifas_ifap",
    "hygiene_infections",
    "communication_epuisement",
-   "travailler_ehpad"
+   "travailler_ehpad",
+   "vae_deas",
+   "bac_assp",
+   "bts_sp3s"
   ],
-  "diplomes": ""
+  "diplomes": " Pour les professionnels expérimentés, Care prépare aussi à la VAE du diplôme d’État d’aide-soignant : l’école prépare le dossier et l’entretien, le diplôme est délivré par l’État après décision du jury."
  },
  {
   "s": "proche-aidant",

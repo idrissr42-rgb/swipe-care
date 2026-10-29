@@ -183,20 +183,72 @@
    "icone": "rocket-launch",
    "court": "Créer son activité de services à la personne",
    "accroche": "Statut, déclaration, autorisation ou agrément, crédit d’impôt de vos clients, tarifs et premiers clients : lancer votre activité en règle."
+  },
+  {
+   "id": "cap_aagga",
+   "icone": "hand-heart",
+   "court": "CAP AAGA",
+   "accroche": "Préparer le CAP Agent accompagnant au grand âge en candidat libre : les épreuves professionnelles, les périodes en structure à justifier et les limites du métier face aux soins."
+  },
+  {
+   "id": "bac_assp",
+   "icone": "student",
+   "court": "Bac pro ASSP",
+   "accroche": "Préparer le bac pro Accompagnement, soins et services à la personne en candidat libre : les épreuves professionnelles, les périodes en milieu professionnel et l’oral."
+  },
+  {
+   "id": "bts_esf",
+   "icone": "house-line",
+   "court": "BTS ESF",
+   "accroche": "Préparer le BTS Économie sociale familiale en candidat libre : alimentation, logement, budget, conseil et action sociale, et les épreuves professionnelles."
+  },
+  {
+   "id": "bts_sp3s",
+   "icone": "buildings",
+   "court": "BTS SP3S",
+   "accroche": "Préparer le BTS Services et prestations des secteurs sanitaire et social en candidat libre : accompagnement des publics, gestion de structure et épreuves professionnelles."
+  },
+  {
+   "id": "tp_rpms",
+   "icone": "briefcase",
+   "court": "Titre pro RPMS",
+   "accroche": "Préparer le titre professionnel Responsable de petite ou moyenne structure : diriger une équipe, mettre en œuvre le projet, rendre compte, et la session en centre agréé."
+  },
+  {
+   "id": "vae_deaes",
+   "icone": "identification-card",
+   "court": "VAE DEAES",
+   "accroche": "Préparer la VAE du diplôme d’État d’accompagnant éducatif et social : recevabilité, description de son expérience bloc par bloc, dossier et entretien avec le jury."
+  },
+  {
+   "id": "vae_deas",
+   "icone": "stethoscope",
+   "court": "VAE DEAS",
+   "accroche": "Préparer la VAE du diplôme d’État d’aide-soignant : recevabilité, description de son expérience bloc par bloc, dossier et entretien avec le jury."
+  },
+  {
+   "id": "vae_deap",
+   "icone": "baby-carriage",
+   "court": "VAE DEAP",
+   "accroche": "Préparer la VAE du diplôme d’État d’auxiliaire de puériculture : recevabilité, description de son expérience bloc par bloc, dossier et entretien avec le jury."
   }
  ],
  "lignes": [
   {
    "n": 1,
-   "nom": "Diplômes et sélections",
+   "nom": "Diplômes et titres",
    "c": "#1F5E52",
    "ids": [
     "cap_aepe",
+    "cap_aagga",
+    "bac_assp",
+    "bts_esf",
+    "bts_sp3s",
     "tp_advf",
     "tp_asms",
-    "selection_ifas_ifap"
+    "tp_rpms"
    ],
-   "public": "Personnes en reconversion, salariés de l’aide à la personne et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture, ainsi que les débutants et les personnes en recherche d’emploi."
+   "public": "Personnes en reconversion, salariés de l’aide à la personne, débutants et personnes en recherche d’emploi qui visent un diplôme ou un titre reconnu par l’État."
   },
   {
    "n": 2,
@@ -263,6 +315,18 @@
     "creer_sap"
    ],
    "public": "Proches aidants, professionnels du soin qui veulent durer dans leur métier, et créateurs d’une activité de services à la personne, ainsi que les débutants et les personnes en recherche d’emploi."
+  },
+  {
+   "n": 7,
+   "nom": "VAE et sélections",
+   "c": "#8A4F9E",
+   "ids": [
+    "vae_deaes",
+    "vae_deas",
+    "vae_deap",
+    "selection_ifas_ifap"
+   ],
+   "public": "Professionnels expérimentés qui veulent faire valider leur expérience par un diplôme d’État, et candidats aux formations d’aide-soignant ou d’auxiliaire de puériculture."
   }
  ],
  "couleurs": {

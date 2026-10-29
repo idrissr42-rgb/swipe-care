@@ -8,7 +8,7 @@ var Q=[
   ['createur','⟦rocket-launch⟧','Je veux créer mon activité','services à la personne'],
   ['emploi','⟦magnifying-glass⟧','Je cherche un emploi dans ce secteur','']]},
  {id:'objectif',q:'Quel est votre objectif principal ?',aide:'Choisissez le plus proche, vous pourrez voir les autres formations ensuite.',o:[
-  ['diplome','⟦graduation-cap⟧','Obtenir un diplôme ou un titre','CAP AEPE, titre ADVF ou ASMS'],
+  ['diplome','⟦graduation-cap⟧','Obtenir un diplôme ou un titre','CAP, bac pro, BTS, titre pro ou VAE'],
   ['ifas','⟦identification-card⟧','Entrer en formation d’aide-soignant ou d’auxiliaire de puériculture','la sélection IFAS ou IFAP'],
   ['enfant','⟦baby⟧','Mieux accompagner les jeunes enfants','développement, sécurité, repas, Montessori'],
   ['quotidien','⟦hand-heart⟧','Mieux aider au quotidien','toilette, repas, médicaments, entretien'],
@@ -21,6 +21,10 @@ var Q=[
   ['aepe','⟦baby-carriage⟧','Travailler avec les jeunes enfants','crèche, école maternelle, assistante maternelle'],
   ['advf','⟦house-line⟧','Aider des personnes et des familles à domicile',''],
   ['asms','⟦hospital⟧','Travailler en établissement médico-social','hygiène des locaux, repas, accompagnement'],
+  ['aaga','⟦hand-heart⟧','Accompagner les personnes âgées en établissement','CAP Agent accompagnant au grand âge'],
+  ['assp','⟦student⟧','Un bac ou un BTS du sanitaire et social','bac pro ASSP, BTS ESF ou SP3S'],
+  ['rpms','⟦briefcase⟧','Diriger une petite structure','titre Responsable de petite ou moyenne structure'],
+  ['vae','⟦identification-card⟧','Faire valider mon expérience','VAE du DEAES, du DEAS ou du DEAP'],
   ['nsp','⟦magnifying-glass⟧','Je ne sais pas encore','']]},
  {id:'exp',q:'Depuis combien de temps travaillez-vous dans ce domaine ?',aide:'Emplois, stages, aide à un proche : tout compte.',o:[
   ['0','⟦plant⟧','Je débute',''],['1','⟦leaf⟧','Moins de 2 ans',''],['3','⟦tree⟧','Plus de 2 ans','']]},
@@ -44,6 +48,10 @@ function diplomes(r){
  if(d==='aepe')return ['cap_aepe','developpement_enfant'];
  if(d==='advf')return ['tp_advf','toilette'];
  if(d==='asms')return ['tp_asms','hygiene_infections'];
+ if(d==='aaga')return ['cap_aagga','alzheimer'];
+ if(d==='assp')return n(r)>=3?['bts_sp3s','bts_esf','bac_assp']:['bac_assp','bts_sp3s','bts_esf'];
+ if(d==='rpms')return ['tp_rpms','creer_sap'];
+ if(d==='vae')return s==='enfance'?['vae_deap','vae_deaes']:['vae_deaes','vae_deas','vae_deap'];
  if(s==='enfance')return ['cap_aepe','tp_advf'];
  if(s==='etab')return ['tp_asms','tp_advf'];
  return ['tp_advf','cap_aepe','tp_asms'];
@@ -94,6 +102,12 @@ function pourquoi(id,r){
  if(id==='cap_aepe')return ['Le diplôme d’État de référence pour travailler avec les enfants de moins de six ans.'];
  if(id==='tp_advf')return ['Le titre professionnel de référence pour aider des personnes et des familles à leur domicile.'];
  if(id==='tp_asms')return ['Un titre professionnel pour travailler en établissement médico-social, auprès des résidents.'];
+ if(id==='cap_aagga')return ['Le CAP pour accompagner les personnes âgées au quotidien en établissement.'];
+ if(id==='bac_assp')return ['Le bac pro du soin et de l’accompagnement, à domicile comme en structure.'];
+ if(id==='bts_esf')return ['Le BTS du conseil en vie quotidienne : budget, logement, alimentation.'];
+ if(id==='bts_sp3s')return ['Le BTS pour coordonner des services et des parcours dans le sanitaire et le social.'];
+ if(id==='tp_rpms')return ['Un titre de niveau 5 pour diriger une petite structure et son équipe.'];
+ if(/^vae_/.test(id))return ['Pour faire reconnaître votre expérience par un diplôme d’État, en préparant le dossier et l’entretien avec le jury.'];
  var x=[RAISON[id]||'Une formation courte et pratique, à suivre en ligne à votre rythme.'];
  if(n(r)===0&&/^(toilette|developpement_enfant|travailler_ehpad|gestes_postures)$/.test(id))x.push('Un bon point de départ si vous débutez.');
  if(r.situation==='aidant'&&/alzheimer|proches_aidants|prevention_chutes/.test(id))x.push('Pensée aussi pour les proches aidants.');
@@ -101,6 +115,7 @@ function pourquoi(id,r){
 }
 function acces(id,r){
  if(!D()[id])return '';
+ if(/^vae_/.test(id))return 'Le diplôme s’obtient ici par la VAE : demande sur France VAE, recevabilité, dossier puis entretien avec un jury. Votre expérience doit être en rapport direct avec le diplôme ; nous vous préparons au dossier et à l’entretien, nous ne délivrons pas le diplôme.';
  if(/^tp_/.test(id))return 'Le titre se passe lors d’une session de validation dans un centre agréé par l’État (ou par la VAE), avec un dossier professionnel et des périodes en entreprise à justifier. Nous vérifions votre situation avec vous.';
  return 'Examen en candidat libre, inscription auprès du rectorat ; périodes en milieu professionnel à justifier selon votre situation.';
 }

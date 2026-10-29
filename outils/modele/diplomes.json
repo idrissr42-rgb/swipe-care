@@ -27,5 +27,78 @@
   "certif": "ministère du Travail",
   "voie": "Préparation en ligne aux trois CCP (bionettoyage des locaux, service hôtelier, accompagnement du résident) et à la session. Le titre se passe lors d’une session de validation dans un centre agréé par la DREETS : mise en situation professionnelle, dossier professionnel, entretien final. Accès par un parcours de formation dans un organisme, avec périodes en entreprise à trouver soi-même, ou par la VAE ; pas d’accès sur demande individuelle.",
   "nature": "Titre professionnel"
+ },
+ "cap_aagga": {
+  "type": "diplome",
+  "diplome": "CAP Agent accompagnant au grand âge",
+  "court": "CAP",
+  "code": "RNCP37669",
+  "niveau": "3",
+  "certif": "ministère de l’Éducation nationale",
+  "voie": "Préparation en ligne aux deux épreuves professionnelles orales (EP1 et EP2). Examen en candidat libre, inscription auprès du rectorat ou du service des examens de votre académie ; stage ou expérience en structure pour personnes âgées à réaliser et à justifier selon la note de l’académie (14 semaines dans les trois ans pour la session 2026), indispensable pour rédiger les fiches."
+ },
+ "bac_assp": {
+  "type": "diplome",
+  "diplome": "Baccalauréat professionnel Accompagnement, soins et services à la personne",
+  "court": "Bac pro",
+  "code": "RNCP37231",
+  "niveau": "4",
+  "certif": "ministère de l’Éducation nationale",
+  "voie": "Préparation en ligne aux épreuves professionnelles E2, E31, E32 et E33. Examen en candidat individuel (candidat libre), inscription auprès du rectorat ou du service des examens de votre académie ; périodes en milieu professionnel (22 semaines dans le diplôme) ou expérience professionnelle à trouver soi-même et à justifier selon la note de l’académie."
+ },
+ "bts_esf": {
+  "type": "diplome",
+  "diplome": "BTS Économie sociale familiale",
+  "court": "BTS",
+  "code": "RNCP36938",
+  "niveau": "5",
+  "certif": "ministère chargé de l’Enseignement supérieur (examen organisé par les rectorats de l’Éducation nationale)",
+  "voie": "Préparation en ligne aux six épreuves (E1 à E6). Examen en candidat individuel (candidat libre), toutes les épreuves en forme ponctuelle, inscription auprès du service des examens de votre académie ; conditions d’accès (notamment trois ans d’expérience professionnelle) et stage ou rapport d’activités pour l’épreuve E3 à vérifier et à justifier vous-même."
+ },
+ "bts_sp3s": {
+  "type": "diplome",
+  "diplome": "BTS Services et prestations des secteurs sanitaire et social",
+  "court": "BTS",
+  "code": "RNCP36939",
+  "niveau": "5",
+  "certif": "ministère de l’Enseignement supérieur et de la Recherche",
+  "voie": "Préparation en ligne aux épreuves professionnelles (E4 territoire, E5 accompagnement et coordination du parcours, E6 projet et démarche qualité) et à l’épreuve de gestion E3. Examen en candidat libre, en forme ponctuelle, inscription auprès de l’académie ; stages ou expérience dans le secteur à trouver et à justifier par l’élève ; épreuves générales (culture générale, langue vivante) à préparer par ailleurs ou dispense à demander."
+ },
+ "tp_rpms": {
+  "type": "diplome",
+  "diplome": "Titre professionnel Responsable de petite ou moyenne structure",
+  "court": "Titre pro",
+  "code": "RNCP38575",
+  "niveau": "5",
+  "certif": "ministère du Travail",
+  "voie": "Préparation en ligne aux trois CCP (diriger une structure avec une équipe ; mettre en œuvre l’objet social ; établir et présenter un rapport d’activité), appliqués aux structures d’aide à domicile et médico-sociales. Le titre se valide lors d’une session organisée par un centre agréé par la DREETS : présentation d’un projet, entretien technique, dossier professionnel et entretien final devant un jury habilité (1 h 35). On y accède par un parcours de formation dans un centre agréé (avec évaluations en cours de formation et période en entreprise) ou par la VAE ; pas de candidature individuelle. Le titre ne suffit pas, à lui seul, à remplir les conditions de qualification des directeurs d’établissements et services sociaux et médico-sociaux.",
+  "nature": "Titre professionnel"
+ },
+ "vae_deaes": {
+  "type": "diplome",
+  "diplome": "Diplôme d’État d’accompagnant éducatif et social",
+  "court": "DEAES",
+  "code": "RNCP42423",
+  "niveau": "3",
+  "certif": "ministère chargé des solidarités",
+  "voie": "Validation des acquis de l’expérience (VAE) : demande sur la plateforme France VAE (vae.gouv.fr), recevabilité prononcée par le certificateur, dossier de validation puis entretien avec un jury, qui décide d’une validation totale, partielle ou d’un refus. L’école prépare en ligne le dossier et l’entretien ; elle n’est ni établissement de formation en travail social, ni accompagnateur officiel France VAE, et ne garantit pas l’obtention."
+ },
+ "vae_deas": {
+  "type": "diplome",
+  "diplome": "Diplôme d’État d’aide-soignant",
+  "court": "DEAS",
+  "code": "RNCP40692",
+  "niveau": "4",
+  "certif": "ministère chargé de la santé",
+  "voie": "Validation des acquis de l’expérience (VAE) uniquement, pour les personnes qui ont déjà une expérience en rapport direct avec le métier. La démarche se fait sur France VAE (vae.gouv.fr) : dossier de faisabilité, recevabilité prononcée par le certificateur, dossier de validation, entretien avec un jury nommé par le préfet de région. Swipe Learn School n’est ni un IFAS ni un accompagnateur VAE officiel : la préparation en ligne aide à rédiger le dossier et à préparer l’entretien, sans garantie de validation. Validation partielle possible, complétée par un nouveau passage devant le jury ou par une formation en IFAS."
+ },
+ "vae_deap": {
+  "type": "diplome",
+  "diplome": "Diplôme d’État d’auxiliaire de puériculture",
+  "court": "DEAP",
+  "code": "RNCP40743",
+  "niveau": "4",
+  "certif": "ministère chargé de la santé",
+  "voie": "Préparation en ligne à la validation des acquis de l’expérience (VAE), pour des personnes qui ont déjà une expérience auprès de jeunes enfants en lien avec le référentiel. La démarche se fait sur France VAE (vae.gouv.fr) : recevabilité décidée par le certificateur, dossier de validation, entretien avec un jury souverain, validation totale ou partielle. L’école prépare le dossier et l’entretien ; elle n’est pas un IFAP, ne délivre pas le diplôme et ne remplace pas l’accompagnement France VAE ni l’AFGSU 2 en présentiel."
  }
 }
