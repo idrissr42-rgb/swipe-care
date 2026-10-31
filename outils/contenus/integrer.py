@@ -16,6 +16,19 @@ sys.path.insert(0, str(Path(__file__).parent))
 import livrets  # noqa: E402
 
 
+def temps_lecons(m):
+    """Ajoute en tête de chaque leçon son temps de travail conseillé, calculé par le barème de l'école (charge.py du dossier des modules)."""
+    import charge
+    for l in m.get('lecons', []):
+        if 'sw-temps' in l['h']:
+            continue
+        mn = charge.charge_lecon(l['h'])[0]
+        mn = max(15, int(round(mn / 15.0)) * 15)
+        t = ('%d h %02d' % (mn // 60, mn % 60)) if mn >= 60 else '%d min' % mn
+        l['h'] = '<p class="sw-temps">Temps de travail conseillé pour cette leçon : <b>≈ ' + t.replace(' 00', '') + '</b></p>' + l['h']
+    return m
+
+
 def main(dossier):
     dossier = Path(dossier)
     sys.path.insert(0, str(dossier.parent))
@@ -28,7 +41,7 @@ def main(dossier):
             manque.append(id_)
             continue
         mod = importlib.import_module(id_)
-        m = mod.MODULE
+        m = temps_lecons(mod.MODULE)
         E[id_] = m
         if getattr(mod, 'DIPLOME', None):
             d = dict(mod.DIPLOME)

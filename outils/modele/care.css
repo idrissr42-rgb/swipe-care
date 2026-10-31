@@ -199,3 +199,14 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 .sl-exemple .sl-voie-k{color:var(--jaune)}
 .sl-exemple .sl-dialogue{padding:0}
 @media (max-width:900px){.sl-exemple{padding:44px 0}.sl-exemple .wrap{grid-template-columns:1fr;gap:22px}}
+/* activités datées des leçons (exercices, travaux guidés, sujets d'entraînement) et temps conseillé */
+.sw-temps{display:inline-block;margin:0 0 12px;padding:6px 12px;border-radius:999px;background:#F3EFE6;font-size:.84rem;color:#4A4033}
+.sw-act{margin:16px 0;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid #E3DCCD;border-left:5px solid #8C7A5B}
+.sw-act.sw-exo{border-left-color:#3E7CB1}.sw-act.sw-travail{border-left-color:#5B8A3C}.sw-act.sw-sujet{border-left-color:#B5542F;background:#FFFBF5}
+.sw-act-t{margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}.sw-act-t b{font-size:1rem}
+.sw-duree{font-size:.78rem;font-weight:700;padding:3px 9px;border-radius:999px;background:#F3EFE6;color:#4A4033;white-space:nowrap}
+.sw-act ul,.sw-act ol{margin:6px 0 6px 20px}.sw-act p{margin:6px 0}
+.sw-act table,.sw-cas table,.sw-corrige table{width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}
+.sw-act td,.sw-act th,.sw-corrige td,.sw-corrige th{border:1px solid #E3DCCD;padding:5px 7px;text-align:left;vertical-align:top}
+.sw-act .sw-corrige{margin:10px 0 0}
+@media (max-width:700px){.sw-act{padding:12px 12px}.sw-act table,.sw-cas table,.sw-corrige table,.sw-projet table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
