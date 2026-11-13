@@ -174,6 +174,7 @@ function vueEleve(e) {
     progression: e.progression || {}, tempsMin: e.tempsMin || 0,
     emargements: (e.emargements || []).filter((x) => x.statut !== "propose").map(({ signature, ...r }) => r),
     messages: e.messages || [],
+    assistant: (e.assistant || []).slice(-ASSISTANT.montrer),
     documents: (e.documents || []).map((d) => ({ id: d.id, titre: d.titre, date: d.date, ...(d.aSigner ? { aSigner: true } : {}), ...(d.signeLe ? { signeLe: d.signeLe, empreinte: d.empreinte } : {}) })),
     prochaine: e.prochaine || "",
     travaux: (e.travaux || []).filter(estObjet).map(vueTravail),
@@ -356,6 +357,34 @@ function lireTravail(t) {
 const TRACE = { sessionsGardees: 300, defiMs: 120_000, conservationMois: 36, intervalles: { leger: 20, renforce: 10 } };
 const RE_APPAREIL = /^[a-f0-9]{16,40}$/;
 
+// ---------------------------------------------------------------------------
+// Assistant pédagogique 24 h/24, 7 j/7 (intelligence artificielle, sur le pilote)
+// ---------------------------------------------------------------------------
+// L'élève pose sa question dans son espace ; le pont l'envoie au pilote
+// (/api/assistant-eleve) avec sa clé PONT_CLE et l'extrait de la leçon ouverte.
+// La clé de l'API Claude reste sur le pilote. Chaque échange est gardé dans la
+// fiche de l'élève et scellé dans le journal de preuves (longueur, pas le texte).
+// Si l'assistant demande un humain, ou s'il est indisponible, la question part
+// au formateur dans la messagerie : l'élève n'est jamais laissé sans réponse.
+const ASSISTANT = { parJour: 40, garder: 200, montrer: 40, question: 1500, extrait: 12000, delaiMs: 26_000 };
+async function demanderAssistant(e, d) {
+  const cle = env("PONT_CLE") || "";
+  if (cle.length < CLE_MIN) return null;
+  const pilote = (env("PILOTE_URL") || "https://pilote.swipelearn.school").replace(/\/$/, "");
+  const historique = (e.assistant || []).slice(-6).map((x) => ({ de: x.de === "eleve" ? "eleve" : "assistant", texte: txt(x.texte, 1500) }));
+  try {
+    const r = await fetch(pilote + "/api/assistant-eleve", {
+      method: "POST", redirect: "error", signal: AbortSignal.timeout(ASSISTANT.delaiMs),
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ecole: e.ecole, cle, prenom: txt(e.prenom, 40), module: txt(d.moduleTitre, 160), lecon: txt(d.lecon, 200), extrait: txt(d.extrait, ASSISTANT.extrait), question: txt(d.question, ASSISTANT.question), historique }),
+    });
+    const j = await r.json().catch(() => null);
+    return j && j.ok === true && typeof j.reponse === "string" ? j : null;
+  } catch {
+    return null;
+  }
+}
+
 function contexteAppareil(d, req, context, ip) {
   const a = estObjet(d.appareil) ? d.appareil : {};
   return {
@@ -490,7 +519,7 @@ function originesAutorisees(req) {
 // Traitement
 // ---------------------------------------------------------------------------
 
-const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre"];
+const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre", "assistant"];
 // actions pilote qui portent sur un seul élève (champ « id »)
 const ACTIONS_UN_ELEVE = [
   "eleve", "eleve_maj", "eleve_supprimer", "emargement_demander", "emargement_valider", "emargement_envoyer", "message_centre",
@@ -666,6 +695,36 @@ async function traiter(req, context, rep, erreur) {
       if (!r2) return refuser();
       if (ligneDoc) await archiverPreuves(store, id, [ligneDoc]);
       return rep({ ok: true, signeLe: preuve.signeLe, empreinte: preuve.empreinte, eleve: vueEleve(r2.objet) });
+    }
+    if (action === "assistant") {
+      const e = await lire("eleve/" + id);
+      if (!e) return refuser();
+      if (e.actif === false) return erreur("Code d'accès inconnu ou désactivé.", 401);
+      const question = txt(d.question, ASSISTANT.question);
+      if (!question) return erreur("Question vide.");
+      const jour = jourParis();
+      const deja = estObjet(e.assistantJour) && e.assistantJour.jour === jour ? Number(e.assistantJour.n) || 0 : 0;
+      if (deja >= ASSISTANT.parJour) return erreur("Vous avez posé beaucoup de questions à l'assistant aujourd'hui. Écrivez à votre formateur dans la messagerie : il vous répond.", 429);
+      const r = await demanderAssistant(e, { ...d, question });
+      const ia = !!r;
+      const transmis = !ia || r.transmettre === true;
+      const reponse = ia ? txt(r.reponse, 4000) : "L'assistant automatique est momentanément indisponible. Votre question est transmise à votre formateur, qui vous répondra dans la messagerie.";
+      const ctxA = contexteAppareil(d, req, context, ip);
+      let ligneA = null;
+      const r2 = await modifierBlob(store, "eleve/" + id, (x) => {
+        const le = maintenant();
+        const j = estObjet(x.assistantJour) && x.assistantJour.jour === jour ? Number(x.assistantJour.n) || 0 : 0;
+        x.assistantJour = { jour, n: j + 1 };
+        const module = txt(d.module, 60);
+        x.assistant = [...(x.assistant || []), { de: "eleve", texte: question, date: le, module }, { de: "assistant", texte: reponse, date: le, module, transmis }].slice(-ASSISTANT.garder);
+        if (transmis) x.messages = [...(x.messages || []), { de: "eleve", texte: "Question posée à l'assistant automatique et transmise à l'équipe : " + question, date: le, lu: false, viaAssistant: true }].slice(-300);
+        ligneA = sceller(x, "assistant", { module, longueur: question.length, transmis, ia }, ctxA, Date.now());
+        x.vuLe = le;
+        return {};
+      });
+      if (!r2) return refuser();
+      if (ligneA) await archiverPreuves(store, id, [ligneA]);
+      return rep({ ok: true, reponse, transmis, eleve: vueEleve(r2.objet) });
     }
     let texte = "";
     if (action === "message") {

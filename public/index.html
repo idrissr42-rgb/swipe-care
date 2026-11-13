@@ -1027,6 +1027,7 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
     <button onclick="vue('eleve','visio',this)">Classe virtuelle</button>
     <button onclick="vue('eleve','docs',this)">Mes documents</button>
     <button onclick="vue('eleve','messages',this)">Messagerie</button>
+    <button onclick="vue('eleve','assistant',this)">Assistant 24 h/24</button>
     <button onclick="vue('eleve','revisions',this);renderRevisions()">Révisions<span id="rev-badge"></span></button>
     <div class="user"><b></b></div>
   </aside>
@@ -1189,6 +1190,12 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
         <div class="doc-l"><div><b>Chef A. Dubois</b><small>« Bien vu pour ton quiz sauces, revois juste la liaison au beurre manié » · hier</small></div><button class="mini">Répondre</button></div>
         <div class="doc-l"><div><b>Secrétariat</b><small>« Ta convocation de juillet est disponible dans tes documents. » · 25/06</small></div><button class="mini">Répondre</button></div>
       </div>
+    </div>
+
+    <div class="vue" id="eleve-assistant">
+      <h2 class="pagetitle">Assistant 24 h/24</h2>
+      <p class="pagesub">Une question sur votre leçon, de jour comme de nuit : l’assistant automatique vous explique le cours. C’est une intelligence artificielle, elle peut se tromper ; vérifiez dans votre leçon. Ce qui demande une personne (inscription, financement, examen, difficulté personnelle) est transmis à votre formateur, qui vous répond dans la messagerie.</p>
+      <div class="panelw"><p class="pt-vide">Connectez-vous à votre espace pour poser une question.</p></div>
     </div>
 
   </main>
@@ -3033,6 +3040,28 @@ function afficher(){
     '<div class="pt-envoi"><textarea id="pt-texte" placeholder="Votre message au secrétariat ou à votre formateur"></textarea><button class="btn btn-j" id="pt-envoyer">Envoyer</button></div>';
   $('pt-texte').value=brouillon;
   $('pt-envoyer').onclick=function(){var t=$('pt-texte').value.trim();if(!t)return;this.disabled=true;api('message',{texte:t}).then(function(j){$('pt-texte').value='';garder(j.eleve);afficher();}).catch(function(x){info(x.message,true);$('pt-envoyer').disabled=false;});};
+  try{rendreAssistant(e);}catch(x){}
+}
+/* ---------- Assistant 24 h/24 (intelligence artificielle, réponses relues par aucun humain : dit à l'élève) ---------- */
+function ctxLecon(){
+  var c=document.getElementById('lc-contenu'),m=typeof modCourant!=='undefined'&&modCourant?String(modCourant):'',cm=coursDe(m);
+  if(!c||!cm)return{module:m,moduleTitre:cm?String(cm.titre||''):'',lecon:'',extrait:''};
+  var t=c.querySelector('h1,h2,h3');
+  return{module:m,moduleTitre:String(cm.titre||m),lecon:t?t.textContent.trim().slice(0,200):'',extrait:(c.textContent||'').replace(/\s+/g,' ').trim().slice(0,12000)};
+}
+function rendreAssistant(e){
+  var z=$('eleve-assistant');if(!z||!e)return;
+  var pa=z.querySelector('.panelw'),br=$('pa-texte')?$('pa-texte').value:'',l=e.assistant||[],c=ctxLecon();
+  pa.innerHTML='<div id="pa-fil" style="max-height:60vh;overflow:auto">'+(l.map(function(m){return'<div class="pt-msg '+(m.de==='eleve'?'moi':'centre')+'"><small>'+(m.de==='eleve'?'Vous':'Assistant (IA)')+' · '+dt(m.date,true)+(m.transmis?'<span class="pt-auto">transmis au formateur</span>':'')+'</small>'+h(m.texte)+'</div>';}).join('')||'<p class="pt-vide">Posez votre première question. Ouvrez d’abord la leçon concernée dans « Mes cours » : l’assistant s’appuie sur elle.</p>')+'</div>'+
+    '<p style="font-size:.8rem;color:#5c6b94;margin:10px 0 6px">'+(c.lecon?'Leçon prise en compte : '+h(c.lecon):c.moduleTitre?'Module pris en compte : '+h(c.moduleTitre):'Aucune leçon ouverte : l’assistant répondra de façon générale.')+'</p>'+
+    '<div class="pt-envoi"><textarea id="pa-texte" maxlength="1500" placeholder="Votre question sur le cours"></textarea><button class="btn btn-j" id="pa-envoyer">Demander</button></div>';
+  $('pa-texte').value=br;
+  var f=$('pa-fil');if(f)f.scrollTop=f.scrollHeight;
+  $('pa-envoyer').onclick=function(){
+    var t=$('pa-texte').value.trim(),b=this;if(!t)return;b.disabled=true;b.textContent='Réflexion…';
+    api('assistant',Object.assign({question:t},ctxLecon())).then(function(j){$('pa-texte').value='';garder(j.eleve);rendreAssistant(j.eleve);if(j.transmis)info('Votre question est aussi transmise à votre formateur.');})
+      .catch(function(x){info(x.message,true);b.disabled=false;b.textContent='Demander';});
+  };
 }
 function ouvrirTravail(id){
   var t=((ses&&ses.eleve&&ses.eleve.travaux)||[]).filter(function(x){return x.id===id;})[0],m=t&&coursDe(t.module);if(!m)return;
@@ -3048,6 +3077,7 @@ window.vue=function(app,v,btn){
   _vue(app,v,btn);
   if(app==='eleve'&&ses&&ses.eleve){
     if(v==='dash')afficher();
+    if(v==='assistant')rendreAssistant(ses.eleve);
     if(v==='messages'&&(ses.eleve.messages||[]).some(function(m){return m.de==='centre'&&!m.lu;}))api('messages_lus').then(function(j){garder(j.eleve);}).catch(function(){});
   }
 };
