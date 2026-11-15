@@ -529,7 +529,14 @@ const ACTIONS_UN_ELEVE = [
 
 /** Échappement HTML pour les e-mails. */
 const escHtml = (x) => String(x ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+/** Copie cachée d'archive : tout e-mail qui part arrive aussi, avec le même objet, à l'adresse de l'école (EMAIL_COPIE, sinon EMAIL_CENTRE, sinon EMAIL_REPONSE), sauf si elle en est déjà destinataire. */
+function avecCopie(corps) {
+  const c = [env("EMAIL_COPIE"), env("EMAIL_CENTRE"), env("EMAIL_REPONSE")].map((x) => String(x || "").trim().toLowerCase()).find((x) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(x));
+  if (!c || corps.bcc || (corps.to || []).some((d) => String(d.email || "").toLowerCase() === c)) return corps;
+  return { ...corps, bcc: [{ email: c }] };
+}
 async function brevo(corps) {
+  corps = avecCopie(corps);
   const r = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST", headers: { "api-key": env("BREVO_API_KEY"), "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify(corps), signal: AbortSignal.timeout(8000),
