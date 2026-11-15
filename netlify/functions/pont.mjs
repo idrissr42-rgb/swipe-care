@@ -552,6 +552,33 @@ function modeleAccuseHtml({ prenom, formation, delai, reponse, nom }) {
 </table></td></tr></table></body></html>`;
 }
 /**
+ * Document signé par un élève : l'équipe est prévenue par e-mail (EMAIL_CENTRE, sinon EMAIL_REPONSE), avec le
+ * document signé et son dossier de preuve en pièce jointe (page HTML à ouvrir ou à imprimer en PDF).
+ * Facultatif : sans Brevo, sans adresse ou en cas d'échec, la signature reste enregistrée et visible dans le pilote.
+ */
+async function prevenirSignature(doc, preuve) {
+  const a = env("EMAIL_CENTRE") || env("EMAIL_REPONSE");
+  if (!a || !env("BREVO_API_KEY") || !env("EMAIL_EXPEDITEUR")) return;
+  const qui = ((preuve.signataire.prenom || "") + " " + (preuve.signataire.nom || "")).trim() || "Un élève";
+  const quand = new Date(preuve.signeLe).toLocaleString("fr-FR", { timeZone: "Europe/Paris", dateStyle: "full", timeStyle: "short" });
+  const lignes = [["Document", doc.titre], ["Signataire", qui + (preuve.signataire.email ? " — " + preuve.signataire.email : "")], ["Date et heure (Paris)", quand], ["Empreinte " + preuve.algorithme, preuve.empreinte], ["Adresse IP", preuve.ip || "non disponible"], ["Consentement", "« " + preuve.mention + " »"]];
+  const tableau = "<table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px\">" + lignes.map((l) => "<tr><td><b>" + escHtml(l[0]) + "</b></td><td style=\"word-break:break-all\">" + escHtml(l[1]) + "</td></tr>").join("") + "</table>";
+  const corps = {
+    sender: { email: env("EMAIL_EXPEDITEUR"), name: env("EMAIL_EXPEDITEUR_NOM") || "Swipe Learn School" },
+    to: [{ email: a }],
+    subject: ("Document signé : " + doc.titre + " — " + qui).slice(0, 200),
+    textContent: qui + " a signé « " + doc.titre + " » le " + quand + ".\nEmpreinte " + preuve.algorithme + " : " + preuve.empreinte + "\n\nLe certificat de signature est dans le pilote : fiche de l'élève, « Documents remis ».",
+    htmlContent: "<p><b>" + escHtml(qui) + "</b> a signé « " + escHtml(doc.titre) + " ».</p>" + tableau + "<p>Le document signé est joint à ce message. Le certificat de signature complet est dans le pilote : fiche de l'élève, « Documents remis ».</p>",
+  };
+  const page = "<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><title>" + escHtml(doc.titre) + " — signé</title></head><body style=\"font-family:Arial,sans-serif;max-width:800px;margin:20px auto\"><h1 style=\"font-size:18px\">Document signé électroniquement</h1>" + tableau + (/^data:image\/png;base64,/.test(preuve.signature || "") ? "<p><b>Signature :</b><br><img src=\"" + preuve.signature + "\" alt=\"Signature\" style=\"max-width:260px;border:1px solid #ccc\"></p>" : "") + "<hr>" + String(doc.html || "") + "</body></html>";
+  try {
+    if (page.length > 600000) throw new Error("trop lourd");
+    await brevo({ ...corps, attachment: [{ name: "document-signe.html", content: Buffer.from(page, "utf8").toString("base64") }] });
+  } catch {
+    try { await brevo({ ...corps, htmlContent: corps.htmlContent.replace("Le document signé est joint à ce message. ", "") }); } catch { /* l'alerte est facultative */ }
+  }
+}
+/**
  * Accusé de réception envoyé à la personne qui vient de s'inscrire (modèle fixe, adresse saisie par elle-même),
  * et prévenance de l'équipe (sans donnée personnelle). Variables Netlify de CE site :
  * BREVO_API_KEY (secrète), EMAIL_EXPEDITEUR (adresse d'un domaine authentifié chez Brevo), EMAIL_EXPEDITEUR_NOM,
@@ -694,6 +721,7 @@ async function traiter(req, context, rep, erreur) {
       });
       if (!r2) return refuser();
       if (ligneDoc) await archiverPreuves(store, id, [ligneDoc]);
+      await prevenirSignature(doc, preuve);
       return rep({ ok: true, signeLe: preuve.signeLe, empreinte: preuve.empreinte, eleve: vueEleve(r2.objet) });
     }
     if (action === "assistant") {
