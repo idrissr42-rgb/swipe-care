@@ -1071,7 +1071,7 @@ nav.pub .sw-burger{background:rgba(255,255,255,.22)}
 
     <div class="vue" id="eleve-cours">
       <h2 class="pagetitle">Mes cours interactifs</h2>
-      <p class="pagesub">Chaque module est construit à partir de votre livret pédagogique : leçons à faire défiler, flashcards de vocabulaire et quiz corrigé. Votre progression est enregistrée (traçabilité FOAD).</p>
+      <p class="pagesub">Chaque module est construit à partir de votre livret pédagogique : leçons avec leurs exercices à faire par écrit, cartes de vocabulaire, quiz corrigé et examens blancs. Vos réponses et votre progression sont enregistrées.</p>
       <div class="mod-grid" id="mod-liste"></div>
       <div class="notice"><b>Assistance pédagogique :</b> un formateur répond à vos questions sous 24 h ouvrées via la messagerie — c'est une exigence légale de la formation à distance, et surtout on est là pour vous ! </div>
     </div>
@@ -2926,8 +2926,8 @@ function instantane(){
   var o={};
   Object.keys(etat).forEach(function(id){
     var st=etat[id],m=COURS[id];if(!m||!st||!st.vues)return;
-    var fait=st.vues.size+(st.quizScore!==null?1:0);
-    var en=(window.SW_ENRICHI||{})[id]||{};o[id]={vues:Array.from(st.vues),lecons:m.lecons.length,pct:Math.round(fait/(m.lecons.length+1)*100),quiz:st.quizScore,quizSur:m.quiz.length,examens:st.examensScores||{},titre:en.titre||m.titre||'',heures:Number(en.heures)||0};
+    var fait=(window.SW_ACT?window.SW_ACT.terminees(id,st.vues):st.vues.size)+(st.quizScore!==null?1:0);
+    var en=(window.SW_ENRICHI||{})[id]||{};o[id]={vues:Array.from(st.vues),finies:(window.SW_ACT?window.SW_ACT.finies(id,st.vues):[]),lecons:m.lecons.length,pct:Math.round(fait/(m.lecons.length+1)*100),quiz:st.quizScore,quizSur:m.quiz.length,examens:st.examensScores||{},titre:en.titre||m.titre||'',heures:Number(en.heures)||0};
   });
   return o;
 }
@@ -3135,7 +3135,7 @@ function demarrer(){
   var rouvrir='';try{rouvrir=sessionStorage.getItem('sw-ouvrir')||'';sessionStorage.removeItem('sw-ouvrir');}catch(e){}
   if(rouvrir)setTimeout(function(){window.espace(rouvrir);},0);
 }
-window.SW_PONT={api:api,h:h,dt:dt,info:info,ECOLE:ECOLE,ESSAI:ESSAI,pied:pied};
+window.SW_PONT={api:api,h:h,dt:dt,info:info,ECOLE:ECOLE,ESSAI:ESSAI,pied:pied,garder:function(e){garder(e);},eleve:function(){return ses&&ses.eleve;}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',demarrer);else demarrer();
 /* Signature électronique d'un document remis par le centre : lecture, consentement, signature à l'écran */
 (function(){
@@ -3442,7 +3442,7 @@ function ouvrir(id,sansHash){var m=COURS[id];if(!m)return;var n=(window.SW_ENRIC
   (o.length?'<div class="fi-c"><h2>Ce que vous saurez faire</h2><ul class="fi-obj">'+o.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'')+
   '<div class="fi-c" id="fi-prog"><h2>Le programme</h2>'+P.map(function(p,i){return '<details class="fi-part"'+(i===0?' open':'')+'><summary>Partie '+(p.k||i+1)+'<small>'+p.l.length+' leçon'+(p.l.length>1?'s':'')+'</small></summary><ol>'+p.l.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ol></details>';}).join('')+'</div>'+
   '<div class="fi-c"><h2>Un extrait de la première leçon</h2><div class="fi-extrait">'+extrait(m)+'</div><p class="fi-lock">⟦lock⟧ La suite, les quiz et les examens blancs sont dans votre espace élève.</p></div>'+
-  '<div class="fi-c"><h2>Comment ça se passe</h2><div class="fi-meth"><div><b>Des leçons courtes</b>Chaque leçon tient en quelques minutes, avec l’essentiel à retenir, le piège à éviter et une mise en pratique.</div><div><b>Votre itinéraire</b>Vous avancez station par station et vous voyez toujours votre prochain arrêt.</div><div><b>Quiz et examens blancs</b>Vous vérifiez vos acquis au fil de l’eau, puis en conditions d’examen.</div><div><b>Un formateur joignable</b>Messagerie avec l’école et suivi de votre progression par l’équipe.</div></div></div>'+
+  '<div class="fi-c"><h2>Comment ça se passe</h2><div class="fi-meth"><div><b>Des leçons qui font travailler</b>Chaque leçon annonce son temps de travail : l’essentiel à retenir, le piège à éviter, puis des exercices à rendre par écrit, avec leur corrigé commenté.</div><div><b>Votre itinéraire</b>Vous avancez station par station et vous voyez toujours votre prochain arrêt.</div><div><b>Quiz et examens blancs</b>Vous vérifiez vos acquis au fil de l’eau, puis en conditions d’examen.</div><div><b>Un formateur joignable</b>Messagerie avec l’école et suivi de votre progression par l’équipe.</div></div></div>'+
   '</div><div class="fi-side">'+carteTarif(id)+
   (function(){var t=window.SW_DIP_TXT&&window.SW_DIP_TXT(id);return t?'<div class="fi-c fi-dipc"><h3>⟦graduation-cap⟧ '+(t.tp?'Titre':'Diplôme')+' préparé</h3><p><b>'+esc(t.titre)+'</b></p><p>'+esc(t.ligne)+'</p><p>'+esc(t.voie)+'</p><p><small>'+(t.tp?'Le titre est délivré par le '+esc(t.certif)+' après une session de validation dans un centre agréé par la DREETS ; Swipe Learn School · Care vous prépare aux compétences évaluées.':'Le diplôme est délivré par le '+esc(t.certif)+' après réussite à l’examen ; Swipe Learn School · Care vous prépare à l’examen.')+'</small></p></div>':'<div class="fi-c"><h3>Reconnaissance</h3><p>Formation courte <b>non certifiante</b> : elle délivre une attestation de fin de formation et un certificat de réalisation, pas un diplôme.</p></div>';})()+(TARIF[id]?'':'<div class="fi-c fi-prix"><h3>Durée et tarif</h3><div class="big">Sur demande</div><p>Ils dépendent de votre projet : nous les étudions avec vous lors d’un entretien.</p><button data-act="inscrire">'+ctaTarif(id)+'</button></div>')+
   '<div class="fi-c"><h3>Pour qui ?</h3><p>'+esc(PUBLIC[li.n]||'Professionnels de l’aide à la personne, proches aidants et personnes en reconversion.')+'</p><h3 style="margin-top:12px">Prérequis</h3><p>Lire et écrire le français, disposer d’un ordinateur, d’une tablette ou d’un téléphone connecté. Aucun diplôme n’est exigé pour suivre la formation.</p></div>'+
@@ -3788,5 +3788,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+<script src="js/activites.js" defer></script>
 </body>
 </html>

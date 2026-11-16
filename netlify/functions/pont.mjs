@@ -176,6 +176,8 @@ function vueEleve(e) {
     messages: e.messages || [],
     assistant: (e.assistant || []).slice(-ASSISTANT.montrer),
     documents: (e.documents || []).map((d) => ({ id: d.id, titre: d.titre, date: d.date, ...(d.aSigner ? { aSigner: true } : {}), ...(d.signeLe ? { signeLe: d.signeLe, empreinte: d.empreinte } : {}) })),
+    // activités des leçons (mises en pratique, exercices, travaux guidés) : date, longueur et auto-évaluation ; le texte reste au serveur
+    acts: Object.fromEntries(Object.entries(estObjet(e.acts) ? e.acts : {}).filter(([, v]) => estObjet(v)).map(([m, v]) => [m, Object.fromEntries(Object.entries(v).filter(([, x]) => estObjet(x)).map(([k, x]) => [k, { le: x.le, n: x.n, ...(x.bilan ? { bilan: x.bilan } : {}) }]))])),
     prochaine: e.prochaine || "",
     travaux: (e.travaux || []).filter(estObjet).map(vueTravail),
     preferences: { rappelsFacultatifs: (e.preferences || {}).rappelsFacultatifs !== false },
@@ -293,6 +295,7 @@ function lireProgression(brut) {
     if (!cle || !estObjet(m)) continue;
     p[cle] = {
       vues: (Array.isArray(m.vues) ? m.vues : []).slice(0, 200).map(Number).filter((n) => Number.isInteger(n) && n >= 0),
+      finies: (Array.isArray(m.finies) ? m.finies : []).slice(0, 200).map(Number).filter((n) => Number.isInteger(n) && n >= 0),
       lecons: Math.max(0, Number(m.lecons) || 0), pct: Math.max(0, Math.min(100, Number(m.pct) || 0)),
       quiz: m.quiz == null || !Number.isFinite(Number(m.quiz)) ? null : Number(m.quiz), quizSur: Math.max(0, Number(m.quizSur) || 0),
       examens: Object.fromEntries(Object.entries(estObjet(m.examens) ? m.examens : {}).slice(0, 20).map(([k, v]) => [txt(k, 20), txt(v, 20)])),
@@ -312,10 +315,12 @@ function emargementsLecons(e, avant, progression, mode = "auto") {
   const ids = new Set((e.emargements || []).map((x) => x.id));
   const nouveaux = [];
   for (const [mod, m] of Object.entries(progression)) {
-    const deja = new Set(estObjet(avant[mod]) && Array.isArray(avant[mod].vues) ? avant[mod].vues : []);
-    for (const n of m.vues) {
+    // Une leçon ouverte n'est pas une leçon terminée : la présence n'est demandée que pour une leçon dont l'élève
+    // a rendu les activités (le serveur le vérifie dans ses propres enregistrements, pas sur la parole du navigateur).
+    const rendues = estObjet(e.acts) && estObjet(e.acts[mod]) ? Object.keys(e.acts[mod]) : [];
+    for (const n of m.finies || []) {
       const id = ("l-" + mod.replace(/[^A-Za-z0-9_-]/g, "") + "-" + n).slice(0, 100);
-      if (deja.has(n) || ids.has(id)) continue;
+      if (ids.has(id) || !m.vues.includes(n) || !rendues.some((k) => k.startsWith(n + "."))) continue;
       const min = m.heures && m.lecons ? Math.round((m.heures / m.lecons) * 60) : 0;
       nouveaux.push({ id, date: jourParis(), session: `${m.titre || mod} — leçon ${n + 1}${m.lecons ? " sur " + m.lecons : ""}`.slice(0, 160), duree: min ? `${Math.floor(min / 60)} h ${String(min % 60).padStart(2, "0")}` : "", statut: mode === "rappel" ? "propose" : "attente", creeLe: maintenant(), type: "lecon", module: mod });
       ids.add(id);
@@ -519,12 +524,12 @@ function originesAutorisees(req) {
 // Traitement
 // ---------------------------------------------------------------------------
 
-const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre", "assistant"];
+const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre", "assistant", "activite_rendre"];
 // actions pilote qui portent sur un seul élève (champ « id »)
 const ACTIONS_UN_ELEVE = [
   "eleve", "eleve_maj", "eleve_supprimer", "emargement_demander", "emargement_valider", "emargement_envoyer", "message_centre",
   "document_remettre", "document_retirer", "document_preuve", "messages_lus_centre", "travail_retirer", "travail_marquer",
-  "preuves", "identite_deposer", "identite_voir", "identite_verifier", "identite_supprimer",
+  "preuves", "identite_deposer", "identite_voir", "identite_verifier", "identite_supprimer", "activites_lire",
 ];
 
 /** Échappement HTML pour les e-mails. */
@@ -730,6 +735,51 @@ async function traiter(req, context, rep, erreur) {
       if (ligneDoc) await archiverPreuves(store, id, [ligneDoc]);
       await prevenirSignature(doc, preuve);
       return rep({ ok: true, signeLe: preuve.signeLe, empreinte: preuve.empreinte, eleve: vueEleve(r2.objet) });
+    }
+    if (action === "activite_rendre") {
+      // Activité d'une leçon (mise en pratique, exercice, travail guidé) : la réponse écrite de l'élève est gardée par le
+      // serveur, avec sa date, sa longueur et son empreinte dans le journal scellé. Le corrigé ne s'ouvre qu'ensuite.
+      // Un second appel avec « bilan » enregistre l'auto-évaluation de l'élève après lecture du corrigé.
+      const e = await lire("eleve/" + id);
+      if (!e) return refuser();
+      if (e.actif === false) return erreur("Code d'accès inconnu ou désactivé.", 401);
+      const module = txt(d.module, 60), lecon = Number(d.lecon), k = txt(d.k, 4), cle = lecon + "." + k;
+      if (!/^[a-z0-9_]{2,60}$/.test(module) || !Number.isInteger(lecon) || lecon < 0 || lecon > 200 || !/^(c|[0-9]{1,2})$/.test(k)) return erreur("Activité inconnue.");
+      const bilan = ["juste", "partiel", "revoir"].includes(d.bilan) ? d.bilan : "";
+      const le = maintenant();
+      if (bilan) {
+        const rb = await modifierBlob(store, "eleve/" + id, (x) => {
+          const a = estObjet(x.acts) && estObjet(x.acts[module]) ? x.acts[module][cle] : null;
+          if (!estObjet(a)) return { erreur: ["Rendez d'abord votre réponse.", 400] };
+          a.bilan = bilan; a.bilanLe = le; x.vuLe = le;
+          return {};
+        });
+        if (!rb) return refuser();
+        if (rb.erreur) return erreur(...rb.erreur);
+        return rep({ ok: true, eleve: vueEleve(rb.objet) });
+      }
+      const texte = txt(d.texte, 6000), titre = txt(d.titre, 200), sorte = ["cas", "exo", "travail"].includes(d.sorte) ? d.sorte : "exo";
+      const prevu = Math.max(0, Math.min(600, Number(d.min) || 0));
+      if (texte.length < 40) return erreur("Votre réponse est trop courte pour être enregistrée.");
+      const empreinte = createHash("sha256").update(texte).digest("hex");
+      const cleBlob = "act/" + e.id + "/" + module;
+      const dossier = (await lire(cleBlob)) || {};
+      const avant = estObjet(dossier[cle]) ? dossier[cle] : null;
+      dossier[cle] = { titre, sorte, prevu, texte, le, empreinte, versions: (avant ? Number(avant.versions) || 1 : 0) + 1, ...(avant ? { premierLe: avant.premierLe || avant.le } : {}) };
+      await ecrire(cleBlob, dossier);
+      const ctxAc = contexteAppareil(d, req, context, ip);
+      let ligneAc = null;
+      const r3 = await modifierBlob(store, "eleve/" + id, (x) => {
+        if (!estObjet(x.acts)) x.acts = {};
+        if (!estObjet(x.acts[module])) x.acts[module] = {};
+        x.acts[module][cle] = { le, n: texte.length, sorte, prevu };
+        x.vuLe = le;
+        ligneAc = sceller(x, "activite_rendue", { module, lecon, k, sorte, prevu, longueur: texte.length, empreinte: empreinte.slice(0, 32) }, ctxAc, Date.now());
+        return {};
+      });
+      if (!r3) return refuser();
+      if (ligneAc) await archiverPreuves(store, id, [ligneAc]);
+      return rep({ ok: true, eleve: vueEleve(r3.objet) });
     }
     if (action === "assistant") {
       const e = await lire("eleve/" + id);
@@ -1007,12 +1057,25 @@ async function traiter(req, context, rep, erreur) {
     for (const doc of e.documents || []) await store.delete("doc/" + e.id + "/" + doc.id);
     const { blobs: pr } = await store.list({ prefix: "preuves/" + e.id + "/" });
     for (const b of pr) await store.delete(b.key);
+    try { const ac = await store.list({ prefix: "act/" + e.id + "/" }); await Promise.all((ac.blobs || []).map((b) => store.delete(b.key))); } catch (x) { console.error("Suppression des réponses aux activités :", x); }
     await store.delete("identite/" + e.id);
     await store.delete("code/" + e.code); await store.delete("eleve/" + e.id);
     return rep({ ok: true });
   }
 
   let prep = {};
+  if (action === "activites_lire") {
+    // Réponses écrites d'un élève aux activités d'un module (lecture par le centre).
+    const e = id ? await lire("eleve/" + id) : null;
+    if (!e) return erreur("Élève introuvable.", 404);
+    const module = txt(d.module, 60);
+    const resume = Object.fromEntries(Object.entries(estObjet(e.acts) ? e.acts : {}).map(([m, v]) => [m, { rendues: Object.keys(estObjet(v) ? v : {}).length, minutesPrevues: Object.values(estObjet(v) ? v : {}).reduce((a, x) => a + (Number(x && x.prevu) || 0), 0), dernier: Object.values(estObjet(v) ? v : {}).map((x) => x && x.le).filter(Boolean).sort().pop() || "" }]));
+    if (!module) return rep({ ok: true, modules: resume });
+    if (!/^[a-z0-9_]{2,60}$/.test(module)) return erreur("Module inconnu.");
+    const dossier = (await lire("act/" + e.id + "/" + module)) || {};
+    const bilans = estObjet(e.acts) && estObjet(e.acts[module]) ? e.acts[module] : {};
+    return rep({ ok: true, module, activites: Object.entries(dossier).map(([cle, a]) => ({ cle, titre: a.titre, sorte: a.sorte, prevu: a.prevu, texte: a.texte, le: a.le, versions: a.versions, bilan: (bilans[cle] || {}).bilan || "" })).sort((a, b) => String(a.le).localeCompare(String(b.le))) });
+  }
   if (action === "preuves") {
     const e = id ? await lire("eleve/" + id) : null;
     if (!e) return erreur("Élève introuvable.", 404);
