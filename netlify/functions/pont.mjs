@@ -178,6 +178,7 @@ function vueEleve(e) {
     documents: (e.documents || []).map((d) => ({ id: d.id, titre: d.titre, date: d.date, ...(d.aSigner ? { aSigner: true } : {}), ...(d.signeLe ? { signeLe: d.signeLe, empreinte: d.empreinte } : {}) })),
     // activités des leçons (mises en pratique, exercices, travaux guidés) : date, longueur et auto-évaluation ; le texte reste au serveur
     acts: Object.fromEntries(Object.entries(estObjet(e.acts) ? e.acts : {}).filter(([, v]) => estObjet(v)).map(([m, v]) => [m, Object.fromEntries(Object.entries(v).filter(([, x]) => estObjet(x)).map(([k, x]) => [k, { le: x.le, n: x.n, ...(x.bilan ? { bilan: x.bilan } : {}) }]))])),
+    classes: (Array.isArray(e.classes) ? e.classes : []).filter(estObjet).map((c) => ({ id: c.id, titre: c.titre, debut: c.debut, dureeMin: c.dureeMin, module: c.module || "", formateur: c.formateur || "", lien: c.lien, ...(c.rejointLe ? { rejointLe: c.rejointLe } : {}) })),
     prochaine: e.prochaine || "",
     travaux: (e.travaux || []).filter(estObjet).map(vueTravail),
     preferences: { rappelsFacultatifs: (e.preferences || {}).rappelsFacultatifs !== false },
@@ -524,14 +525,29 @@ function originesAutorisees(req) {
 // Traitement
 // ---------------------------------------------------------------------------
 
-const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre", "assistant", "activite_rendre"];
+const ACTIONS_ELEVE = ["connexion", "sync", "progression", "signer", "message", "document_lire", "document_signer", "messages_lus", "preferences", "presence_repondre", "assistant", "classe_rejoindre", "activite_rendre"];
 // actions pilote qui portent sur un seul élève (champ « id »)
 const ACTIONS_UN_ELEVE = [
   "eleve", "eleve_maj", "eleve_supprimer", "emargement_demander", "emargement_valider", "emargement_envoyer", "message_centre",
   "document_remettre", "document_retirer", "document_preuve", "messages_lus_centre", "travail_retirer", "travail_marquer",
-  "preuves", "identite_deposer", "identite_voir", "identite_verifier", "identite_supprimer", "activites_lire",
+  "preuves", "identite_deposer", "identite_voir", "identite_verifier", "identite_supprimer", "activites_lire", "classe_planifier", "classe_retirer",
 ];
 
+/** Prévient l'élève par e-mail qu'une classe virtuelle est programmée (le lien reste dans son espace). */
+async function prevenirClasse(e, classe, quand) {
+  if (!e || !e.email || !env("BREVO_API_KEY") || !env("EMAIL_EXPEDITEUR")) return;
+  const site = (env("URL") || "").replace(/\/$/, "");
+  try {
+    await brevo({
+      sender: { email: env("EMAIL_EXPEDITEUR"), name: env("EMAIL_EXPEDITEUR_NOM") || "Swipe Learn School" },
+      to: [{ email: e.email, name: ((e.prenom || "") + " " + (e.nom || "")).trim() || undefined }],
+      ...(env("EMAIL_REPONSE") ? { replyTo: { email: env("EMAIL_REPONSE") } } : {}),
+      subject: ("Classe virtuelle le " + quand + " : " + classe.titre).slice(0, 200),
+      textContent: "Bonjour " + (e.prenom || "") + ",\n\nUne classe virtuelle est programmée : « " + classe.titre + " », le " + quand + ", pour " + classe.dureeMin + " minutes" + (classe.formateur ? ", avec " + classe.formateur : "") + ".\n\nPour y assister : ouvrez votre espace élève" + (site ? " (" + site + ")" : "") + ", rubrique « Classe virtuelle ». Le bouton « Rejoindre la classe » s'ouvre 15 minutes avant le début. Prévoyez un endroit calme, le micro et la caméra de votre téléphone ou de votre ordinateur.\n\nÀ bientôt,\nL'équipe Swipe Learn School",
+      htmlContent: "<p>Bonjour " + escHtml(e.prenom || "") + ",</p><p>Une classe virtuelle est programmée : <b>« " + escHtml(classe.titre) + " »</b>, le <b>" + escHtml(quand) + "</b>, pour " + classe.dureeMin + " minutes" + (classe.formateur ? ", avec " + escHtml(classe.formateur) : "") + ".</p><p>Pour y assister : ouvrez votre espace élève" + (site ? " (<a href=\"" + escHtml(site) + "\">" + escHtml(site.replace(/^https?:\/\//, "")) + "</a>)" : "") + ", rubrique « Classe virtuelle ». Le bouton « Rejoindre la classe » s'ouvre 15 minutes avant le début. Prévoyez un endroit calme, le micro et la caméra de votre téléphone ou de votre ordinateur.</p><p>À bientôt,<br>L'équipe Swipe Learn School</p>",
+    });
+  } catch (x) { console.error("Mail de classe virtuelle :", x && x.message); }
+}
 /** Échappement HTML pour les e-mails. */
 const escHtml = (x) => String(x ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
 /** Copie cachée d'archive : tout e-mail qui part arrive aussi, avec le même objet, à l'adresse de l'école (EMAIL_COPIE, sinon EMAIL_CENTRE, sinon EMAIL_REPONSE), sauf si elle en est déjà destinataire. */
@@ -781,6 +797,26 @@ async function traiter(req, context, rep, erreur) {
       if (ligneAc) await archiverPreuves(store, id, [ligneAc]);
       return rep({ ok: true, eleve: vueEleve(r3.objet) });
     }
+    if (action === "classe_rejoindre") {
+      // L'élève ouvre le lien de la classe virtuelle : l'heure d'entrée est notée et scellée au journal.
+      const classeId = txt(d.classeId, 60);
+      const ctxCl = contexteAppareil(d, req, context, ip);
+      let ligneCl = null, lien = "";
+      const r2 = await modifierBlob(store, "eleve/" + id, (x) => {
+        if (x.actif === false) return { erreur: true };
+        const c = (Array.isArray(x.classes) ? x.classes : []).find((y) => estObjet(y) && y.id === classeId);
+        if (!c) return { erreur: true };
+        lien = c.lien;
+        if (!c.rejointLe) c.rejointLe = maintenant();
+        x.vuLe = maintenant();
+        ligneCl = sceller(x, "classe_rejointe", { classe: classeId, titre: txt(c.titre, 120), debut: c.debut }, ctxCl, Date.now());
+        return {};
+      });
+      if (!r2) return refuser();
+      if (r2.erreur) return erreur("Classe virtuelle introuvable.", 404);
+      if (ligneCl) await archiverPreuves(store, id, [ligneCl]);
+      return rep({ ok: true, lien, eleve: vueEleve(r2.objet) });
+    }
     if (action === "assistant") {
       const e = await lire("eleve/" + id);
       if (!e) return refuser();
@@ -1013,6 +1049,47 @@ async function traiter(req, context, rep, erreur) {
     return rep({ ok: true, eleve: e });
   }
 
+  if (action === "classe_planifier") {
+    // Classe virtuelle : une séance en visio (lien fourni par le centre), inscrite chez chaque élève concerné.
+    const ids = [...new Set((Array.isArray(d.ids) ? d.ids : []).map((x) => txt(x, 40)).filter(Boolean))].slice(0, 300);
+    if (!ids.length) return erreur("Choisissez au moins un élève (« ids »).");
+    const c = estObjet(d.classe) ? d.classe : {};
+    const titre = txt(c.titre, 160), lien = txt(c.lien, 300), debut = new Date(String(c.debut || "")), dureeMin = Math.round(Number(c.dureeMin));
+    if (!titre) return erreur("Donnez un titre à la classe virtuelle.");
+    if (isNaN(debut)) return erreur("Date et heure de début attendues.");
+    if (!(dureeMin >= 15 && dureeMin <= 480)) return erreur("Durée attendue : de 15 minutes à 8 heures.");
+    let u = null; try { u = new URL(lien); } catch { u = null; }
+    if (!u || u.protocol !== "https:") return erreur("Lien de la visio attendu (adresse en https).");
+    const classe = { id: RE_ID_LIBRE.test(String(c.id || "")) ? String(c.id) : "cl-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), titre, debut: debut.toISOString(), dureeMin, module: txt(c.module, 60), formateur: txt(c.formateur, 80), lien: u.toString(), creeLe: maintenant(), creePar: txt(c.creePar, 80) };
+    const quandCl = debut.toLocaleString("fr-FR", { timeZone: "Europe/Paris", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+    const inscrits = [], deja = [], introuvables = [];
+    for (const idE of ids) {
+      const r = await modifierBlob(store, "eleve/" + idE, (e) => {
+        if (!Array.isArray(e.classes)) e.classes = [];
+        if (e.classes.some((x) => estObjet(x) && x.id === classe.id)) return { sansEcriture: true, deja: true };
+        e.classes = [...e.classes, { ...classe }].slice(-200);
+        e.messages = [...(e.messages || []), { de: "centre", texte: ("Classe virtuelle programmée : « " + classe.titre + " », le " + quandCl + " (" + classe.dureeMin + " min). Rendez-vous dans « Classe virtuelle » : le bouton « Rejoindre » s'ouvre 15 minutes avant.").slice(0, 2000), date: maintenant(), lu: false }].slice(-300);
+        return {};
+      });
+      if (!r) introuvables.push(idE); else if (r.deja) deja.push(idE); else { inscrits.push(idE); await prevenirClasse(r.objet, classe, quandCl); }
+    }
+    return rep({ ok: true, classe, eleves: inscrits, deja, introuvables });
+  }
+  if (action === "classe_retirer") {
+    const ids = [...new Set((Array.isArray(d.ids) ? d.ids : [id]).map((x) => txt(x, 40)).filter(Boolean))].slice(0, 300);
+    const classeId = txt(d.classeId, 60);
+    if (!ids.length || !classeId) return erreur("Élève et classe virtuelle attendus.");
+    const retires = [];
+    for (const idE of ids) {
+      const r = await modifierBlob(store, "eleve/" + idE, (e) => {
+        const avant = (Array.isArray(e.classes) ? e.classes : []).length;
+        e.classes = (Array.isArray(e.classes) ? e.classes : []).filter((x) => !(estObjet(x) && x.id === classeId));
+        return e.classes.length === avant ? { sansEcriture: true } : {};
+      });
+      if (r && !r.sansEcriture) retires.push(idE);
+    }
+    return rep({ ok: true, eleves: retires });
+  }
   if (action === "travail_donner") {
     const ids = [...new Set((Array.isArray(d.ids) ? d.ids : []).map((x) => txt(x, 40)).filter(Boolean))].slice(0, 300);
     if (!ids.length) return erreur("Choisissez au moins un élève (« ids »).");
